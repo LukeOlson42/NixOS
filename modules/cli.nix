@@ -1,5 +1,13 @@
 { config, pkgs, ... }:
 
+let
+    zshTheme = ''
+        PROMPT="%B%{$fg[red]%}[$fg[yellow]%}%n%{$fg[green]%}@%{$fg{blue}%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{reset_color%}$%b "
+    '';
+    prependZshCustom = ''
+        export ZSH_CUSTOM="${config.home.homeDirectory}/.oh-my-zsh/custom"
+    '';
+in
 {
 	home = {
 		packages = with pkgs; [
@@ -14,12 +22,16 @@
 		];
 	};
 
+    home.file.".oh-my-zsh/custom/themes/lukeolson.zsh-theme".text = zshTheme;
+    home.file.".zshrc".text = ''
+        ${prependZshCustom}
+    '';
+
 	programs.zsh = {
 		enable = true;
 		enableCompletion = true;
-
 		shellAliases = {
-			ls = "exa";
+			ls = "eza";
 			cls = "clear";
 		};
 
@@ -30,7 +42,7 @@
 
 		oh-my-zsh = {
 			enable = true;
-			theme = "robbyrussell";
+			theme = "lukeolson";
 		};
 	};
 
