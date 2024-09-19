@@ -6,7 +6,6 @@
             waybar
             mako
             libnotify
-            swww
             rofi-wayland
 		];
     };
@@ -14,9 +13,13 @@
     programs.rofi = {
         enable = true;
         terminal = "alacritty";
-        font = "Iosevka 8";
+        font = "Iosevka 10";
         theme = "gruvbox-dark";
         package = pkgs.rofi-wayland;
+    };
+
+    programs.wpaperd = {
+
     };
 
     programs.kitty.enable = true;

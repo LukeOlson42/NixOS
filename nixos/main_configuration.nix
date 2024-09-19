@@ -125,6 +125,7 @@
 		EDITOR = "nvim";
 		VISUAL = "nvim";
 		TERM = "alacritty";
+		SHELL = "zsh";
 	};
 
 	# List services that you want to enable:
