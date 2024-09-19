@@ -7,8 +7,13 @@
             mako
             libnotify
             swww
-            rofi-wayland
 		];
+    };
+
+    programs.rofi = {
+        enable = true;
+        terminal = "alacritty"
+        font = "Iosevka"
     };
 
     programs.kitty.enable = true;

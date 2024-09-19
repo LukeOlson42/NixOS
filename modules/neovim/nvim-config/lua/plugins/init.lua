@@ -7,4 +7,5 @@ require('plugins/harpoon')
 require('plugins/lualine')
 require('plugins/telescope')
 require('plugins/mini')
+require('plugins/colorscheme')
 
