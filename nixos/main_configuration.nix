@@ -124,6 +124,7 @@
 	environment.variables = {
 		EDITOR = "nvim";
 		VISUAL = "nvim";
+		TERM = "alacritty";
 	};
 
 	# List services that you want to enable:

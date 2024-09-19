@@ -22,8 +22,9 @@
             "$editor" = "nvim";
             "$fileManager" = "yazi";
             bind = [
-                "$mainMod, f, exec, firefox"
-                "$mainMod, o, exec, yazi"
+                "$mainMod, f, exec, $browser"
+                "$mainMod, o, exec, $fileManager"
+                "$mainMod, q, exec, $terminal"
             ] ++ (
                 builtins.concatLists (builtins.genList (i:
                     let ws = i + 1;
