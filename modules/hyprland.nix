@@ -32,7 +32,7 @@
                 "$mainMod, O, exec, $fileManager"
                 "$mainMod, Q, exec, $terminal"
                 "$mainMod, M, exec, exit"
-                "$mainMod, M, exec, $menu"
+                "$mainMod, R, exec, $menu"
             ] ++ (
                 builtins.concatLists (builtins.genList (i:
                     let ws = i + 1;
