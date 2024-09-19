@@ -16,12 +16,14 @@
         enable = true;
         settings = {
             "$mainMod" = "SUPER";
+            "$mod" = "SUPER";
             "$terminal" = "alacritty";
             "$browser" = "firefox";
             "$editor" = "nvim";
             "$fileManager" = "yazi";
             bind = [
                 "$mainMod, f, exec, firefox"
+                "$mainMod, o, exec, yazi"
             ] ++ (
                 builtins.concatLists (builtins.genList (i:
                     let ws = i + 1;
