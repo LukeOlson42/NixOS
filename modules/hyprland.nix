@@ -7,6 +7,7 @@
             mako
             libnotify
             swww
+            rofi-wayland
 		];
     };
 
@@ -15,6 +16,7 @@
         terminal = "alacritty";
         font = "Iosevka 8";
         theme = "gruvbox-dark";
+        package = pkgs.rofi-wayland;
     };
 
     programs.kitty.enable = true;
