@@ -3,7 +3,7 @@
 let
     zshTheme = ''
         autoload -U colors && colors
-        PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$fg[purple]%} $%b '
+        PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$fg[green]%} $%b '
     '';
     prependZshCustom = ''
         export ZSH_CUSTOM="${config.home.homeDirectory}/.oh-my-zsh/custom"
