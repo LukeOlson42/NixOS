@@ -13,7 +13,7 @@
     programs.rofi = {
         enable = true;
         terminal = "alacritty";
-        font = "Iosevka Nerd Font";
+        font = "Iosevka Nerd Font 12";
     };
 
     programs.kitty.enable = true;
@@ -26,10 +26,13 @@
             "$browser" = "firefox";
             "$editor" = "nvim";
             "$fileManager" = "yazi";
+            "$menu" = "rofi -show drun";
             bind = [
-                "$mainMod, f, exec, $browser"
-                "$mainMod, o, exec, $fileManager"
-                "$mainMod, q, exec, $terminal"
+                "$mainMod, F, exec, $browser"
+                "$mainMod, O, exec, $fileManager"
+                "$mainMod, Q, exec, $terminal"
+                "$mainMod, M, exec, exit"
+                "$mainMod, M, exec, $menu"
             ] ++ (
                 builtins.concatLists (builtins.genList (i:
                     let ws = i + 1;
