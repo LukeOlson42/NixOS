@@ -13,7 +13,7 @@
     programs.rofi = {
         enable = true;
         terminal = "alacritty";
-        font = "Iosevka";
+        font = "Iosevka Nerd Font";
     };
 
     programs.kitty.enable = true;
