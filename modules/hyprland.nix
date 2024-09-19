@@ -12,8 +12,8 @@
 
     programs.rofi = {
         enable = true;
-        terminal = "alacritty"
-        font = "Iosevka"
+        terminal = "alacritty";
+        font = "Iosevka";
     };
 
     programs.kitty.enable = true;
