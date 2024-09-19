@@ -13,7 +13,7 @@
     programs.rofi = {
         enable = true;
         terminal = "alacritty";
-        font = "Iosevka 12";
+        font = "Iosevka 16";
         theme = "gruvbox-dark";
     };
 
