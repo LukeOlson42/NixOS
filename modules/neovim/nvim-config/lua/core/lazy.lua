@@ -32,7 +32,7 @@ require("lazy").setup({
 --         end
 -- 	},
 
-    { 'ellisonleao/gruvbox.vim' },
+    { 'ellisonleao/gruvbox.nvim' },
 
 	{
 		'nvim-telescope/telescope.nvim',
