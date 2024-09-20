@@ -6,7 +6,7 @@ let
         PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$fg[green]%} $%b '
     '';
     prependZshCustom = ''
-        export ZSH_CUSTOM="${config.home.homeDirectory}/.oh-my-zsh/custom/"
+        source "${config.home.homeDirectory}/.oh-my-zsh/custom/"
     '';
 in
 {
@@ -24,9 +24,7 @@ in
 	};
 
     home.file.".oh-my-zsh/custom/themes/lukeolson.zsh-theme".text = zshTheme;
-    home.file.".zshrc".text = ''
-        ${prependZshCustom}
-    '';
+
 
 	programs.zsh = {
 		enable = true;
@@ -36,17 +34,18 @@ in
 			cls = "clear";
 		};
 
+        dotDir = ".config/zsh";
+
 		history = {
 			size = 1000;
 			path = "${config.xdg.dataHome}/zsh/history";
 		};
 
-		oh-my-zsh = {
-			enable = true;
-			theme = "lukeolson";
-		};
-
-        dotDir = ".config/zsh";
+        oh-my-zsh = {
+            enable = true;
+            theme = "lukeolson";
+            custom = "${config.home.homeDirectory}/.oh-my-zsh/custom";
+        };
 	};
 
 	programs.yazi = {
