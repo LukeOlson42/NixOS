@@ -45,6 +45,8 @@ in
 			enable = true;
 			theme = "lukeolson";
 		};
+
+        dotDir = ".config/zsh";
 	};
 
 	programs.yazi = {
