@@ -89,11 +89,8 @@
         wayland.enable = true;
     };
 
-    programs.hyprland = {
-        enable = true;
-        xwayland.enable = true;
-        # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    };
+    programs.hyprland.enable = true;
+    programs.hyprland.xwayland.enable = true;
 
     hardware.graphics.enable = true;
 

@@ -19,13 +19,26 @@
     };
 
     programs.wpaperd = {
-
-    };
-
-    programs.kitty.enable = true;
-    wayland.windowManager.hyprland = {
         enable = true;
         settings = {
+            default = {
+                duration = "30m";
+                sorting = "ascending";
+                mode = "center";
+            };
+
+            any = {
+                path = "${config.home.homeDirectory}/NixOS/modules/wallpapers";
+            };
+        };
+    };
+
+    wayland.windowManager.hyprland = {
+        enable = true;
+        # Display Server !!
+        # xwayland.enable = true;
+        settings = {
+            # Hyprland Variables !!
             "$mainMod" = "SUPER";
             "$mod" = "SUPER";
             "$terminal" = "alacritty";
@@ -33,12 +46,15 @@
             "$editor" = "nvim";
             "$fileManager" = "yazi";
             "$menu" = "rofi -show drun";
+
+            # Keybinds !!
             bind = [
                 "$mainMod, F, exec, $browser"
                 "$mainMod, O, exec, $fileManager"
                 "$mainMod, Q, exec, $terminal"
-                "$mainMod, M, exec, exit"
+                "$mainMod, M, exit"
                 "$mainMod, R, exec, $menu"
+                "$mainMod, C, killactive"
             ] ++ (
                 builtins.concatLists (builtins.genList (i:
                     let ws = i + 1;
@@ -47,6 +63,17 @@
                     ]
                 ) 9)
             );
+
+            misc = {
+                disable_hyprland_logo = true;
+                animate_mouse_windowdragging = true;
+            };
+
+            # Startup Programs !!
+            exec-once = [
+                "wpaperd"
+            ];
+
         };
     };
 }

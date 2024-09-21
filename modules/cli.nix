@@ -5,9 +5,6 @@ let
         autoload -U colors && colors
         PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$fg[green]%} $%b '
     '';
-    prependZshCustom = ''
-        source "${config.home.homeDirectory}/.oh-my-zsh/custom/"
-    '';
 in
 {
 	home = {
@@ -20,11 +17,11 @@ in
 			tealdeer
 			neofetch
 			gcc
+            xclip
 		];
 	};
 
     home.file.".oh-my-zsh/custom/themes/lukeolson.zsh-theme".text = zshTheme;
-
 
 	programs.zsh = {
 		enable = true;
@@ -93,7 +90,7 @@ in
             };
 
 			shell.program = "zsh";
-            window.opacity = 0.95;
+            window.opacity = 0.9;
 		};
 	};
 
