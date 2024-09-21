@@ -64,6 +64,11 @@
                 ) 9)
             );
 
+            bindm = [
+                "$mainMod, mouse:272, movewindow"
+                "$mainMod, mouse:273, resizewindow"
+            ];
+
             misc = {
                 disable_hyprland_logo = true;
                 animate_mouse_windowdragging = true;

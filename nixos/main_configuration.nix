@@ -60,11 +60,11 @@
 	# Lets use some flakes baybee
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-	# Only keep a month's worth of generations
+	# Only keep a week's worth of generations
 	nix.settings.auto-optimise-store = true;
 	nix.gc.automatic = true;
 	nix.gc.dates = "daily";
-	nix.gc.options = "--delete-older-than 15d";
+	nix.gc.options = "--delete-older-than 7d";
 
 	# Allow unfree packages
 	nixpkgs.config.allowUnfree = true;
