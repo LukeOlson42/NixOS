@@ -45,7 +45,9 @@ remap('n', "Q", "<nop>")
 
 -- help how do i quit
 remap('i', "<C-c>", "<Esc>l")
+remap('i', "<C-j>", "<Esc>l")
 remap('v', "<C-c>", "<Esc>")
+remap('v', "<C-j>", "<Esc>")
 
 -- set this one when on a unix machine
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })

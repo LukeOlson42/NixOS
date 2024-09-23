@@ -34,8 +34,9 @@ set.swapfile = false
 -- I like having the current line highlighted
 -- with a nice gold color :)
 vim.api.nvim_set_hl(0, 'CursorLineNr', {
---    fg = '#cfb53b',  -- this is my attempt at making a nice gold
-    fg = '#E7C664',  -- this is the actual sonokai yellow
+    --    fg = '#cfb53b',  -- this is my attempt at making a nice gold
+    --    fg = '#E7C664',  -- this is the actual sonokai yellow
+    fg = '#fadb2f',     -- gruvbox bright yellow
     bold = true,
 })
 set.termguicolors = true

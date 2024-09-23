@@ -16,8 +16,9 @@ in
 			# TLDR
 			tealdeer
 			neofetch
-			gcc
             xclip
+            # GCC, just in case ;)
+            gcc 
 		];
 	};
 
@@ -27,7 +28,7 @@ in
 		enable = true;
 		enableCompletion = true;
 		shellAliases = {
-			ls = "eza";
+			ls = "eza -l";
 			cls = "clear";
 		};
 
