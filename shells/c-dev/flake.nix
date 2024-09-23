@@ -17,7 +17,7 @@
                 buildInputs = [
                     gcc
                     gdb
-                    make
+                    gnumake
                     cmake
                 ];
             };
