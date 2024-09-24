@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
 	imports =
@@ -13,9 +13,6 @@
 
 	# Bootloader.
 	boot.loader.systemd-boot.enable = true;
-	# boot.loader.grub.enable = true;
-    # boot.loader.grub.device = "/dev/sda";
-	boot.loader.grub.efiSupport = true;
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	networking.hostName = "nixon"; # Define your hostname.
@@ -91,6 +88,18 @@
         enable = true;
         wayland.enable = true;
         autoNumlock = true;
+
+        sugarCandyNix = {
+            enable = true;
+            settings = {
+                Background   = lib.cleanSource ../modules/wallpapers/halfdome.jpg;
+                ScreenWidth  = 1920;
+                ScreenHeight = 1080;
+                FormPosition = "left";
+                HaveFormBackground = true;
+                PartialBlur = true;
+            };
+        };
     };
 
     programs.hyprland.enable = true;

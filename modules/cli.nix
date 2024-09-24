@@ -19,6 +19,7 @@ in
             xclip
             # GCC, just in case ;)
             gcc 
+            btop
 		];
 	};
 
@@ -55,12 +56,17 @@ in
 	programs.alacritty = {
 		enable = true;
 		settings = {
+            env = {
+                "TERM" = "xterm-256color";
+            };
+
 			font = {
 				size = 10;
 				normal.family = "Iosevka Nerd Font";
 				bold.family = "Iosevka Nerd Font";
 				italic.family = "Iosevka Nerd Font";
 			};
+
             colors = {
                 primary = {
                     background = "#282828";
@@ -89,6 +95,12 @@ in
                     white = "#ebebb2";
                 };
             };
+
+            mouse.bindings = [
+                { "mouse" = "Right"; "action" = "Paste"; }
+            ];
+
+            cursor.style = "Block";
 
 			shell.program = "zsh";
             window.opacity = 0.9;

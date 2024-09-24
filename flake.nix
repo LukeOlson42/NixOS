@@ -1,5 +1,5 @@
 {
-	description = "NixOS Flake";
+	description = "Luke's NixOS Flake!";
 
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -11,46 +11,28 @@
   		};
 
         hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+
+        sddm-sugar-candy-nix = {
+            url = "github:Zhaith-Izaliel/sddm-sugar-candy-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 	};
 
-	outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
+	outputs = { ... }@inputs:
 	let
-		system = "x86_64-linux";
-		pkgs = import nixpkgs {
-			inherit system;
-			config = {
-				allowUnfree = true;
-			};
-		};
+        # Thanks vimjoyer for the resources !
+        my_lib = import ./lib/helpers.nix { inherit inputs; };
 	in
+    with my_lib;
 	{
 		nixosConfigurations = {
-			# We can build configurations for different machines!
-			mainNixOS = nixpkgs.lib.nixosSystem {
-				specialArgs = { inherit inputs system; };
-				modules = [
-					./nixos/main_configuration.nix
-					home-manager.nixosModules.default
-				];
-			};
-
-			# For CLI-only NixOS configuration
-			# workNixOS = nixpkgs.lib.nixosSystem {
-			# 	specialArgs = { inherit inputs system; };
-			# 	modules = [
-			# 		./nixos/work_configuration.nix
-			# 		home-manager.nixosModules.default
-			# 	];
-			# };
-
-			# For CLI-only NixOS configuration
-			# cliNixOS = nixpkgs.lib.nixosSystem {
-			# 	specialArgs = { inherit inputs system; };
-			# 	modules = [
-			# 		./nixos/cli_configuration.nix
-			# 		home-manager.nixosModules.default
-			# 	];
-			# };
+            mainNixOS = mkSystem ./nixos/main_configuration.nix;
 		};
+
+        homeConfigurations = {
+            "lukeolson@nixon" = mkHome "x86_64-linux" ./modules/home.nix;
+        };
+
+        this-is-a-test = inputs.sddm-sugar-candy-nix;
 	};
 }
