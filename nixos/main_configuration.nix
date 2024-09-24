@@ -13,6 +13,9 @@
 
 	# Bootloader.
 	boot.loader.systemd-boot.enable = true;
+	# boot.loader.grub.enable = true;
+    # boot.loader.grub.device = "/dev/sda";
+	boot.loader.grub.efiSupport = true;
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	networking.hostName = "nixon"; # Define your hostname.
