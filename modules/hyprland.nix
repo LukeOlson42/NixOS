@@ -29,8 +29,8 @@ in
     home.pointerCursor = {
         gtk.enable = true;
         package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Classic";
-        size = 12;
+        name = "Bibata-Modern-Ice";
+        size = 10;
     };
 
     programs.rofi = {
@@ -104,6 +104,24 @@ in
             general = {
                 allow_tearing = false;
                 layout = "dwindle";
+                gaps_in = 5;
+                gaps_out = 20;
+                border_size = 2;
+
+                # gruvbox blue and light blue
+                "col.active_border" = "rgba(8ec07cff) rgba(689d6aff) 60deg";
+                # not gruvbox gray, but pretty nice 
+                "col.inactive_border" = "rgba(595959aa)";
+
+                resize_on_border = false;
+            };
+
+            "windowrulev2" = "suppressevent maximize, class:.*";
+
+            decoration = {
+                rounding = 5;
+                active_opacity = 1.0;
+                inactive_opacity = 0.9;
             };
 
             input = {
