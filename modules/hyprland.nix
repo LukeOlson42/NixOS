@@ -1,5 +1,21 @@
 { config, pkgs, ... }:
+let
+    mkSwitchWkspCmds =
+        builtins.concatLists (builtins.genList (i:
+        let ws = i + 1; in
+            [
+                "$mainMod, code:1${toString i}, workspace, ${toString ws}"
+            ]
+        ) 9);
 
+    mkMvWindowCmds =
+        builtins.concatLists (builtins.genList (i:
+        let ws = i + 1; in
+            [
+                "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ]
+        ) 9);
+in
 {
     home = {
 		packages = with pkgs; [
@@ -8,6 +24,13 @@
             libnotify
             rofi-wayland
 		];
+    };
+
+    home.pointerCursor = {
+        gtk.enable = true;
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+        size = 12;
     };
 
     programs.rofi = {
@@ -35,11 +58,9 @@
 
     wayland.windowManager.hyprland = {
         enable = true;
-        # Display Server !!
-        # xwayland.enable = true;
         settings = {
             # Hyprland Variables !!
-            "$mainMod" = "SUPER";
+            "$mainMod" = "ALT";
             "$mod" = "SUPER";
             "$terminal" = "alacritty";
             "$browser" = "firefox";
@@ -49,22 +70,28 @@
 
             # Keybinds !!
             bind = [
+                # General Keybinds
                 "$mainMod, F, exec, $browser"
-                "$mainMod, O, exec, $fileManager"
-                "$mainMod, Q, exec, $terminal"
+                "$mainMod, O, exec, $terminal -e $fileManager"
+                "$mainMod, T, exec, $terminal"
                 "$mainMod, M, exit"
                 "$mainMod, R, exec, $menu"
-                "$mainMod, C, killactive"
-            ] ++ (
-                builtins.concatLists (builtins.genList (i:
-                    let ws = i + 1;
-                    in [
-                        "$mainMod, code:1${toString i}, workspace, ${toString ws}"
-                    ]
-                ) 9)
-            );
+                "$mainMod, Q, killactive"
+                "$mainMod, V, togglefloating"
+                "$mainMod, J, togglesplit"
+                "$mainMod, P, pseudo"
+
+                # Movement Keybinds
+                "$mainMod, mouse_down, workspace, e+1"
+                "$mainMod, mouse_up, workspace, e-1"
+                "$mainMod, h, movefocus, l"
+                "$mainMod, j, movefocus, d"
+                "$mainMod, k, movefocus, u"
+                "$mainMod, l, movefocus, r"
+            ] ++ mkMvWindowCmds ++ mkSwitchWkspCmds;
 
             bindm = [
+                # Move and Resize Windows
                 "$mainMod, mouse:272, movewindow"
                 "$mainMod, mouse:273, resizewindow"
             ];
@@ -72,6 +99,23 @@
             misc = {
                 disable_hyprland_logo = true;
                 animate_mouse_windowdragging = true;
+            };
+
+            general = {
+                allow_tearing = false;
+                layout = "dwindle";
+            };
+
+            input = {
+                kb_layout = "us";
+                accel_profile = "flat";
+                sensitivity = 0.0;
+                follow_mouse = 1;
+            };
+
+            dwindle = {
+                pseudotile = true;
+                preserve_split = true;
             };
 
             # Startup Programs !!

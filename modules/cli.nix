@@ -116,4 +116,10 @@ in
     programs.ssh = {
         enable = true;
     };
+
+    programs.tmux = {
+        enable = true;
+        shell = "~/.nix-profile/bin/zsh";
+
+    };
 }

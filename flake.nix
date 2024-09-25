@@ -32,7 +32,5 @@
         homeConfigurations = {
             "lukeolson@nixon" = mkHome "x86_64-linux" ./modules/home.nix;
         };
-
-        this-is-a-test = inputs.sddm-sugar-candy-nix;
 	};
 }
