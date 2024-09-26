@@ -20,6 +20,9 @@ in
             # GCC, just in case ;)
             gcc 
             btop
+
+            #idk where to put this at the moment
+            pulseaudio
 		];
 	};
 

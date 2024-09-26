@@ -19,7 +19,6 @@ in
 {
     home = {
 		packages = with pkgs; [
-            waybar
             mako
             libnotify
             rofi-wayland
@@ -46,7 +45,7 @@ in
         settings = {
             default = {
                 duration = "30m";
-                sorting = "ascending";
+                sorting = "random";
                 mode = "center";
             };
 
@@ -54,6 +53,70 @@ in
                 path = "${config.home.homeDirectory}/NixOS/modules/wallpapers";
             };
         };
+    };
+
+    programs.waybar = {
+        enable = true;        
+        style = ./waybar/style.css;
+        settings = [{
+            layer = "top";
+            modules-left =  ["hyprland/workspaces"];
+            modules-right = [
+                "tray"
+                "cpu"
+                "memory"
+                "backlight"
+                "network"
+                "pulseaudio"
+                "battery"
+                "clock"
+            ];
+            "hyprland/workspaces" = {
+                format = "{icon}";
+                on-scroll-up   = "hyprctl dispatch workspace e+1";
+                on-scroll-down = "hyprctl dispatch workspace e-1";
+            };
+            tray = {
+                # "icon-size" = 21,
+                spacing = 10;
+            };
+            clock = {
+                tooltip-format = "{:%m-%d-%Y | %H:%M}";
+                format-alt = "{:%Y-%m-%d}";
+                format = "{:%a %m-%d-%Y - %H:%M %p}";
+            };
+            cpu = {
+                format = "CPU: {usage}%";
+            };
+            memory = {
+                format = "RAM: {}%";
+            };
+            backlight = {
+                # device = "intel_backlight";
+                format = "　{percent}%";
+                format-icons = ["" ""];
+            };
+            battery = {
+                format = "{capacity}%";
+            };
+            network = {
+                format-wifi = "WiFi: {signalStrength}%";
+                format-ethernet = "{ifname}: {ipaddr}/{cidr} ethernet";
+                format-disconnected = "Disconnected";
+            };
+            pulseaudio = {
+                # scroll-step = 1,
+                format = "　{volume}%";
+                format-bluetooth = "{volume}% {icon}";
+                format-muted = "Mute";
+                format-icons = {
+                    headphones = "";
+                    phone = "";
+                    default = ["" ""];
+                };
+                on-click = "pavucontrol";
+            };
+        }];
     };
 
     wayland.windowManager.hyprland = {
@@ -108,7 +171,6 @@ in
                 gaps_out = 20;
                 border_size = 2;
 
-                # gruvbox blue and light blue
                 "col.active_border" = "rgba(8ec07cff) rgba(689d6aff) 60deg";
                 # not gruvbox gray, but pretty nice 
                 "col.inactive_border" = "rgba(595959aa)";
@@ -139,6 +201,7 @@ in
             # Startup Programs !!
             exec-once = [
                 "wpaperd"
+                "waybar"
             ];
 
         };
