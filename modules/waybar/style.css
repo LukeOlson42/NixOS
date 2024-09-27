@@ -2,44 +2,39 @@
     border: none;
     border-radius: 0;
     font-family: "Iosevka Nerd Font";
-    font-size: 12px;
+    font-size: 10px;
     /*font-weight: bold;*/
     min-height: 0;
+    /* test: ""; */
 }
 
 window#waybar {
-    background: #000000;
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: #e5e9f0;
-    border: 2px;
-    border-radius: 4px;
+    background: rgba(40, 40, 40, 0.5);
+    border: 0px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: #ffffff;
+    color: #ebebb2;
     border-bottom: 3px solid transparent;
 }
 
 #workspaces button.active {
     background: #4c566a;
-    border-bottom: 3px solid #e5e9f0;
+    border-bottom: 2px solid #ebebb2;
 }
 
 #workspaces button.urgent {
     background-color: #bf616a;
 }
 
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid #ffffff;
-}
-
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #mode, #idle_inhibitor {
     padding: 0 10px;
-    margin: 0 5px;
+    margin: 0 2px;
+    background: transparent;
+    color: #ebebb2;
 }
 
 #clock {
@@ -57,13 +52,7 @@ window#waybar {
     color: #e5e9f0;
 }
 
-@keyframes blink {
-    to {
-        /*background-color: #ffffff;*/
-        color: #000000;
-    }
-}
-
+/*
 #battery.critical:not(.charging) {
     background: #f53c3c;
     color: #ffffff;
@@ -73,25 +62,22 @@ window#waybar {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+*/
 
 #cpu {
-    background: #2ecc71;
-    color: #e5e9f0;
+    border-bottom: 1px solid #cc241d;
 }
 
 #memory {
-    background: #9b59b6;
-    color: #e5e9f0;
+    border-bottom: 1px solid #fe8019;
 }
 
 #backlight {
-    background: #90b1b1;
-    color: #e5e9f0;
+    border-bottom: 1px solid #fadb2f;
 }
 
 #network {
-    background: #2980b9;
-    color: #e5e9f0;
+    border-bottom: 1px solid #b8bb26;
 }
 
 #network.disconnected {
@@ -109,20 +95,3 @@ window#waybar {
     color: #e5e9f0;
 }
 
-#custom-media {
-    background: #66cc99;
-    color: #2a5c45;
-}
-
-#temperature {
-    background: #f0932b;
-}
-
-#temperature.critical {
-    background: #eb4d4b;
-}
-
-#tray {
-    background-color: #2980b9;
-    color: #e5e9f0;
-}
