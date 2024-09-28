@@ -40,6 +40,8 @@ window#waybar {
 #custom-logo {
     background: transparent;
     color: #ebebb2;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 #cpu {

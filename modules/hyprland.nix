@@ -61,7 +61,7 @@ in
         settings = [{
             layer = "top";
             modules-left =  ["hyprland/workspaces"];
-            modules-center = [ "logo" ];
+            modules-center = [ "custom/logo" ];
             modules-right = [
                 "tray"
                 "cpu"
@@ -78,7 +78,7 @@ in
                 on-scroll-down = "hyprctl dispatch workspace e-1";
             };
             "custom/logo" = {
-                format = "";
+                format = " ";
             };
             tray = {
                 # "icon-size" = 21,
