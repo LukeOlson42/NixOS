@@ -61,6 +61,7 @@ in
         settings = [{
             layer = "top";
             modules-left =  ["hyprland/workspaces"];
+            modules-center = [ "logo" ];
             modules-right = [
                 "tray"
                 "cpu"
@@ -75,6 +76,9 @@ in
                 format = "{icon}";
                 on-scroll-up   = "hyprctl dispatch workspace e+1";
                 on-scroll-down = "hyprctl dispatch workspace e-1";
+            };
+            "custom/logo" = {
+                format = "";
             };
             tray = {
                 # "icon-size" = 21,
@@ -97,12 +101,12 @@ in
                 format-icons = ["" ""];
             };
             battery = {
-                format = "{capacity}%";
+                format = "　{capacity}%";
             };
             network = {
                 format-wifi = "WiFi: {signalStrength}%";
                 format-ethernet = "{ifname}: {ipaddr}/{cidr} ethernet";
-                format-disconnected = "Disconnected";
+                format-disconnected = "Down";
             };
             pulseaudio = {
                 # scroll-step = 1,

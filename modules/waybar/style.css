@@ -30,42 +30,20 @@ window#waybar {
     background-color: #bf616a;
 }
 
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #mode, #idle_inhibitor {
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio {
     padding: 0 10px;
     margin: 0 2px;
     background: transparent;
     color: #ebebb2;
 }
 
-#clock {
-    background-color: #64727D;
-    color: #e5e9f0;
+#custom-logo {
+    background: transparent;
+    color: #ebebb2;
 }
-
-#battery {
-    /*background-color: #000000;*/
-    color: #e5e9f0;
-}
-
-#battery.charging {
-    /*background-color: #000000;*/
-    color: #e5e9f0;
-}
-
-/*
-#battery.critical:not(.charging) {
-    background: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-*/
 
 #cpu {
-    border-bottom: 1px solid #cc241d;
+    border-bottom: 1px solid #fb4934;
 }
 
 #memory {
@@ -81,17 +59,28 @@ window#waybar {
 }
 
 #network.disconnected {
-    background: #f53c3c;
-    color: #e5e9f0;
+    color: #fb4934;
+    border-bottom: 1px solid #b8bb26;
 }
 
 #pulseaudio {
-    background: #000000;
-    color: #e5e9f0;
+    border-bottom: 1px solid #8ec07c;
 }
 
 #pulseaudio.muted {
-    background: #000000;
-    color: #e5e9f0;
+    border-bottom: 1px solid #8ec07c;
+    color: #fb4934;
 }
 
+#clock {
+    color: #ebebb2;
+}
+
+#battery {
+    border-bottom: 1px solid #d3869b;
+}
+
+#battery.charging {
+    color: #b8bb26;
+    border-bottom: 1px solid #d3869b;
+}
