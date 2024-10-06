@@ -22,5 +22,5 @@ require('mini.git').setup({
     },
 })
 
-vim.keymap.set({ 'n', 'v' }, '<C-g>', '<cmd>MiniGit.show_at_cursor()<CR>', { desc = "Show git history at cursor" })
-vim.keymap.set('v', '<C-g>', '<cmd>MiniGit.show_range_history()<CR>', { desc = "Show git history of line range" })
+vim.keymap.set({ 'n', 'v' }, '<C-g>', '<cmd>lua MiniGit.show_at_cursor()<CR>', { desc = "Show git history at cursor" })
+vim.keymap.set('v', '<C-g>', '<cmd>lua MiniGit.show_range_history()<CR>', { desc = "Show git history of line range" })
