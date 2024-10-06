@@ -8,4 +8,5 @@ require('plugins/lualine')
 require('plugins/telescope')
 require('plugins/mini')
 require('plugins/colorscheme')
+require('plugins/oil')
 

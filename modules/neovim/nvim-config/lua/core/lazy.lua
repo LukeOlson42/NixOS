@@ -21,16 +21,6 @@ local config = {
 }
 
 require("lazy").setup({
--- 	{
---         'sainnhe/sonokai',
---         config = function()
---             vim.cmd('let g:sonokai_enable_italic = 0')
---             vim.cmd('let g:sonokai_disable_italic_comment = 1')
---             vim.cmd('let g:sonokai_dim_inactive_windows = 1')
---             vim.cmd("let g:sonokai_diagnostic_virtual_text = 'colored'")
---             vim.cmd('colorscheme sonokai')
---         end
--- 	},
 
     { 'ellisonleao/gruvbox.nvim' },
 
@@ -41,32 +31,19 @@ require("lazy").setup({
 
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = {'kyazdani42/nvim-web-devicons'}
+        dependencies = {'nvim-tree/nvim-web-devicons'}
     },
 
     {'nvim-treesitter/nvim-treesitter'},
 
---    {
---        'VonHeikemen/lsp-zero.nvim', -- need to rework when we get nvim 0.10.x
---        dependencies = {
---            -- LSP Support
---            {'neovim/nvim-lspconfig'},             -- Required
---            {'williamboman/mason.nvim'},           -- Optional
---            {'williamboman/mason-lspconfig.nvim'}, -- Optional
---
---            -- Autocompletion
---            {'hrsh7th/nvim-cmp'},         -- Required
---            {'hrsh7th/cmp-nvim-lsp'},     -- Required
---            {'hrsh7th/cmp-path'},         -- Optional
---            {'hrsh7th/cmp-nvim-lua'},     -- Optional
---
---            -- Snippets
---            {'L3MON4D3/LuaSnip'},             -- Required
---        }
---    },
-
     {'theprimeagen/harpoon'},
 
     {'echasnovski/mini.nvim', version = '*'},
+
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        dependencies = {'nvim-tree/nvim-web-devicons'},
+    },
 
 }, config)

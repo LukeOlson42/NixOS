@@ -73,6 +73,9 @@
 	environment.systemPackages = with pkgs; [
 		firefox
 		home-manager
+        linux-manual
+        man-pages
+        man-pages-posix
 	];
 
 	# Some programs need SUID wrappers, can be configured further or are
