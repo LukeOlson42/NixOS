@@ -46,4 +46,13 @@ require("lazy").setup({
         dependencies = {'nvim-tree/nvim-web-devicons'},
     },
 
+    {
+        'ej-shafran/compile-mode.nvim',
+        opts = {},
+	dependencies = {'nvim-lua/plenary.nvim'},
+        config = function()
+            print('Compile mode: Enabled')
+        end,
+    },
+
 }, config)
