@@ -51,7 +51,9 @@ require("lazy").setup({
         opts = {},
 	dependencies = {'nvim-lua/plenary.nvim'},
         config = function()
-            print('Compile mode: Enabled')
+            vim.g.compile_mode = {
+
+            }
         end,
     },
 

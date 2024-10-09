@@ -171,8 +171,8 @@ in
             general = {
                 allow_tearing = false;
                 layout = "dwindle";
-                gaps_in = 5;
-                gaps_out = 20;
+                gaps_in = 2;
+                gaps_out = 10;
                 border_size = 2;
 
                 "col.active_border" = "rgba(8ec07cff) rgba(689d6aff) 60deg";
