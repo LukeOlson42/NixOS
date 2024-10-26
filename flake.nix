@@ -16,6 +16,8 @@
             url = "github:Zhaith-Izaliel/sddm-sugar-candy-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        
+        community-emacs.url = "github:nix-community/emacs-overlay";
 	};
 
 	outputs = { ... }@inputs:

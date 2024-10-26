@@ -195,6 +195,7 @@ in
                 accel_profile = "flat";
                 sensitivity = 0.0;
                 follow_mouse = 1;
+                kb_options = "ctrl:nocaps";
             };
 
             dwindle = {

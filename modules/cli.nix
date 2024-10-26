@@ -11,12 +11,14 @@ in
 		packages = with pkgs; [
 			wget
 			unzip
+
 			# Eza - ls replacement
 			eza
 			# TLDR
 			tealdeer
 			neofetch
             xclip
+
             # GCC, just in case ;)
             gcc 
             btop

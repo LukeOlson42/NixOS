@@ -110,6 +110,7 @@
 
     hardware.graphics.enable = true;
 
+    nixpkgs.overlays = [ inputs.community-emacs.overlay ];
 
 	# Home Manager
 	home-manager = {
