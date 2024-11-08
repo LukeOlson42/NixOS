@@ -12,8 +12,22 @@
 	];
 
 	# Bootloader.
-	boot.loader.systemd-boot.enable = true;
-	boot.loader.efi.canTouchEfiVariables = true;
+	# boot.loader.systemd-boot.enable = true;
+	# boot.loader.efi.canTouchEfiVariables = true;
+
+    boot.loader = {
+        grub = {
+            enable = true;
+            device = "nodev";
+            useOSProber = true;
+            efiSupport = true;
+        };
+        efi = {
+            canTouchEfiVariables = true;
+            efiSysMountPoint = "/boot";
+        };
+    };
+
 
 	networking.hostName = "nixon"; # Define your hostname.
 	# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
