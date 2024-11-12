@@ -60,10 +60,9 @@ in
         style = ./waybar/style.css;
         settings = [{
             layer = "top";
-            modules-left =  ["hyprland/workspaces"];
+            modules-left =  ["hyprland/workspaces" "tray"];
             modules-center = [ "custom/logo" ];
             modules-right = [
-                "tray"
                 "cpu"
                 "memory"
                 "backlight"
@@ -209,6 +208,7 @@ in
                 "waybar"
             ];
 
+            monitor = "eDP-1, 1920x1080@60, 0x0, 1.2";
         };
     };
 }

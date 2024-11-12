@@ -15,6 +15,7 @@
 	./neovim/nvim.nix
 	./hyprland.nix
 	./emacs.nix
+	./steam.nix
   ];
 
   # Let Home Manager install and manage itself.
