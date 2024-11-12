@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0;
     font-family: "Iosevka Nerd Font";
-    font-size: 10px;
+    font-size: 14px;
     /*font-weight: bold;*/
     min-height: 0;
     /* test: ""; */
@@ -40,37 +40,37 @@ window#waybar {
 #custom-logo {
     background: transparent;
     color: #ebebb2;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 #cpu {
-    border-bottom: 1px solid #fb4934;
+    border-bottom: 2px solid #fb4934;
 }
 
 #memory {
-    border-bottom: 1px solid #fe8019;
+    border-bottom: 2px solid #fe8019;
 }
 
 #backlight {
-    border-bottom: 1px solid #fadb2f;
+    border-bottom: 2px solid #fadb2f;
 }
 
 #network {
-    border-bottom: 1px solid #b8bb26;
+    border-bottom: 2px solid #b8bb26;
 }
 
 #network.disconnected {
     color: #fb4934;
-    border-bottom: 1px solid #b8bb26;
+    border-bottom: 2px solid #b8bb26;
 }
 
 #pulseaudio {
-    border-bottom: 1px solid #8ec07c;
+    border-bottom: 2px solid #8ec07c;
 }
 
 #pulseaudio.muted {
-    border-bottom: 1px solid #8ec07c;
+    border-bottom: 2px solid #8ec07c;
     color: #fb4934;
 }
 
@@ -79,10 +79,10 @@ window#waybar {
 }
 
 #battery {
-    border-bottom: 1px solid #d3869b;
+    border-bottom: 2px solid #d3869b;
 }
 
 #battery.charging {
     color: #b8bb26;
-    border-bottom: 1px solid #d3869b;
+    border-bottom: 2px solid #d3869b;
 }

@@ -35,7 +35,7 @@ in
     programs.rofi = {
         enable = true;
         terminal = "alacritty";
-        font = "Iosevka 10";
+        font = "Iosevka 12";
         theme = "gruvbox-dark";
         package = pkgs.rofi-wayland;
     };
@@ -208,7 +208,7 @@ in
                 "waybar"
             ];
 
-            monitor = "eDP-1, 1920x1080@60, 0x0, 1.2";
+            monitor = "eDP-1, 1920x1080@60, 0x0, 1";
         };
     };
 }
