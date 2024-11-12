@@ -22,6 +22,7 @@ in
             mako
             libnotify
             rofi-wayland
+            brightnessctl
 		];
     };
 
@@ -162,6 +163,14 @@ in
                 "$mainMod, mouse:273, resizewindow"
             ];
 
+            binde = [
+                ", XF86AudioLowerVolume, exec, wpctl set-volume 55 5%-"
+                ", XF86AudioRaiseVolume, exec, wpctl set-volume 55 5%+"
+                ", XF86AudioMute, exec, wpctl set-mute 55 toggle"
+                ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
+                ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
+            ];
+
             misc = {
                 disable_hyprland_logo = true;
                 animate_mouse_windowdragging = true;
@@ -181,6 +190,7 @@ in
                 resize_on_border = false;
             };
 
+            # Do we need this?
             "windowrulev2" = "suppressevent maximize, class:.*";
 
             decoration = {
