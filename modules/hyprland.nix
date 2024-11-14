@@ -140,7 +140,7 @@ in
                 # General Keybinds
                 "$mainMod, F, exec, $browser"
                 "$mainMod, O, exec, $terminal -e $fileManager"
-                "$mainMod, T, exec, $terminal"
+                "$mainMod, Return, exec, $terminal"
                 "$mainMod, M, exit"
                 "$mainMod, R, exec, $menu"
                 "$mainMod, Q, killactive"
@@ -218,6 +218,7 @@ in
                 "waybar"
             ];
 
+            # This may have to change between machines, later problem
             monitor = "eDP-1, 1920x1080@60, 0x0, 1";
         };
     };
