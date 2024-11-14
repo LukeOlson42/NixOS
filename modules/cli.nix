@@ -22,9 +22,6 @@ in
             # GCC, just in case ;)
             gcc 
             btop
-
-            #idk where to put this at the moment
-            pulseaudio
 		];
 	};
 
@@ -34,7 +31,7 @@ in
 		enable = true;
 		enableCompletion = true;
 		shellAliases = {
-			ls = "eza -l";
+			ls = "eza -l -s extension";
 			cls = "clear";
 		};
 
@@ -55,16 +52,23 @@ in
 	programs.yazi = {
 		enable = true;
         enableZshIntegration = true;
+        settings = {
+            opener = {
+                edit = [
+                    {
+                        run = "alacritty -e nvim $@";
+                        orphan = true;
+                        for = "unix";
+                    }
+                ];
+            };
+        };
 	};
-    xdg.configFile."yazi/yazi.toml".source = ./yazi/theme.toml;
+    #xdg.configFile."yazi/yazi.toml".source = ./yazi/theme.toml;
 
 	programs.alacritty = {
 		enable = true;
 		settings = {
-            env = {
-                "TERM" = "xterm-256color";
-            };
-
 			font = {
 				size = 12;
 				normal.family = "Iosevka Nerd Font";

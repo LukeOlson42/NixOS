@@ -61,9 +61,10 @@ in
         style = ./waybar/style.css;
         settings = [{
             layer = "top";
-            modules-left =  ["hyprland/workspaces" "tray"];
+            modules-left =  ["hyprland/workspaces"];
             modules-center = [ "custom/logo" ];
             modules-right = [
+                "tray"
                 "cpu"
                 "memory"
                 "backlight"
@@ -82,7 +83,7 @@ in
             };
             tray = {
                 # "icon-size" = 21,
-                spacing = 10;
+                spacing = 12;
             };
             clock = {
                 tooltip-format = "{:%m-%d-%Y | %H:%M}";

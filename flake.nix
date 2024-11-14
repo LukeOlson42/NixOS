@@ -29,6 +29,7 @@
 	{
 		nixosConfigurations = {
             mainNixOS = mkSystem ./nixos/main_configuration.nix;
+            # mainDesktop = mkSystem ./nixos/main_configuration.nix;
 		};
 
         homeConfigurations = {
