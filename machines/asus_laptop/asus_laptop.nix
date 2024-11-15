@@ -4,8 +4,11 @@
 	imports = [ 
         # Include the results of the hardware scan.
 		./asus_hardware.nix
+
         # Kinda hacky but it works
 		inputs.home-manager.nixosModules.home-manager
+
+        ../../components/gaming/gaming.nix
 	];
 
 	# Bootloader
@@ -77,10 +80,6 @@
         linux-manual
         man-pages
         man-pages-posix
-
-        # for Steam, factor out somehow
-        mangohud
-        protonup
 	];
 
     services.xserver.enable = true;
@@ -92,7 +91,7 @@
         sugarCandyNix = {
             enable = true;
             settings = {
-                Background   = lib.cleanSource ../../modules/wallpapers/halfdome.jpg;
+                Background   = lib.cleanSource ../../wallpapers/halfdome.jpg;
                 ScreenWidth  = 1920;
                 ScreenHeight = 1080;
                 FormPosition = "left";
@@ -109,8 +108,6 @@
         enable = true;
         enable32Bit = true;
     };
-
-    nixpkgs.overlays = [ inputs.community-emacs.overlay ];
 
 	# Home Manager
 	home-manager = {
@@ -141,20 +138,6 @@
 		TERM = "alacritty";
 		SHELL = "zsh";
 	};
-
-    # Steam Setup
-    programs.gamemode.enable = true;
-    programs.steam = {
-        enable = true;
-        remotePlay.openFirewall = true;
-        dedicatedServer.openFirewall = true;
-        localNetworkGameTransfers.openFirewall = true;
-        gamescopeSession.enable = true;
-    };
-
-    environment.sessionVariables = {
-        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-    };
 
 	system.stateVersion = "24.05"; 
 }

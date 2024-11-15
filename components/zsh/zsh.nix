@@ -30,4 +30,12 @@ in
             custom = "${config.home.homeDirectory}/.oh-my-zsh/custom";
         };
 	};
+
+    programs.zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+        options = [
+            "--cmd cd"
+        ];
+    };
 }

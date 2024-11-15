@@ -51,7 +51,7 @@ in
             };
 
             any = {
-                path = "${config.home.homeDirectory}/NixOS/modules/wallpapers";
+                path = "${config.home.homeDirectory}/NixOS/wallpapers";
             };
         };
     };
