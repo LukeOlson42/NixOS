@@ -1,13 +1,9 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { inputs, config, pkgs, lib, ... }:
 
 {
 	imports = [ 
         # Include the results of the hardware scan.
-		./hardware-configuration.nix
+		./asus_hardware.nix
         # Kinda hacky but it works
 		inputs.home-manager.nixosModules.home-manager
 	];
@@ -96,7 +92,7 @@
         sugarCandyNix = {
             enable = true;
             settings = {
-                Background   = lib.cleanSource ../modules/wallpapers/halfdome.jpg;
+                Background   = lib.cleanSource ../../modules/wallpapers/halfdome.jpg;
                 ScreenWidth  = 1920;
                 ScreenHeight = 1080;
                 FormPosition = "left";
@@ -120,7 +116,7 @@
 	home-manager = {
         extraSpecialArgs = { inherit inputs; };
         users = {
-            lukeolson = import ./../modules/home.nix;
+            lukeolson = import ./../../modules/home.nix;
         };
 	};
 

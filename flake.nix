@@ -28,12 +28,13 @@
     with my_lib;
 	{
 		nixosConfigurations = {
-            mainNixOS = mkSystem ./nixos/main_configuration.nix;
-            # mainDesktop = mkSystem ./nixos/main_configuration.nix;
+            asusLaptop = mkSystem ./machines/asus_laptop/asus_laptop.nix;
+            # mainDesktop = mkSystem ./machines/desktop/desktop.nix;
 		};
 
         homeConfigurations = {
             "lukeolson@nixon" = mkHome "x86_64-linux" ./modules/home.nix;
+            # "lukeolson@desktop" = mkHome "x86_64-linux" ./modules/home.nix;
         };
 	};
 }
