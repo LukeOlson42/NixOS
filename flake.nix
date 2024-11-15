@@ -33,7 +33,7 @@
 		};
 
         homeConfigurations = {
-            "lukeolson@nixon" = mkHome "x86_64-linux" ./modules/home.nix;
+            "lukeolson@nixon" = mkHome "x86_64-linux" ./profiles/lukeolson.nix;
             # "lukeolson@desktop" = mkHome "x86_64-linux" ./modules/home.nix;
         };
 	};

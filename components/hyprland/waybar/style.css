@@ -1,0 +1,88 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Iosevka Nerd Font";
+    font-size: 14px;
+    /*font-weight: bold;*/
+    min-height: 0;
+    /* test: ""; */
+}
+
+window#waybar {
+    background: rgba(40, 40, 40, 0.5);
+    border: 0px;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: #ebebb2;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.active {
+    background: #4c566a;
+    border-bottom: 2px solid #ebebb2;
+}
+
+#workspaces button.urgent {
+    background-color: #bf616a;
+}
+
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio {
+    padding: 0 10px;
+    margin: 0 2px;
+    background: transparent;
+    color: #ebebb2;
+}
+
+#custom-logo {
+    background: transparent;
+    color: #ebebb2;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#cpu {
+    border-bottom: 2px solid #fb4934;
+}
+
+#memory {
+    border-bottom: 2px solid #fe8019;
+}
+
+#backlight {
+    border-bottom: 2px solid #fadb2f;
+}
+
+#network {
+    border-bottom: 2px solid #b8bb26;
+}
+
+#network.disconnected {
+    color: #fb4934;
+    border-bottom: 2px solid #b8bb26;
+}
+
+#pulseaudio {
+    border-bottom: 2px solid #8ec07c;
+}
+
+#pulseaudio.muted {
+    border-bottom: 2px solid #8ec07c;
+    color: #fb4934;
+}
+
+#clock {
+    color: #ebebb2;
+}
+
+#battery {
+    border-bottom: 2px solid #d3869b;
+}
+
+#battery.charging {
+    color: #b8bb26;
+    border-bottom: 2px solid #d3869b;
+}

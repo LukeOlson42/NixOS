@@ -64,7 +64,6 @@ in
             };
         };
 	};
-    #xdg.configFile."yazi/yazi.toml".source = ./yazi/theme.toml;
 
 	programs.alacritty = {
 		enable = true;
