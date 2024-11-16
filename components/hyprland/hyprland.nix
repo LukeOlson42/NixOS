@@ -152,10 +152,21 @@ in
                 # Movement Keybinds
                 "$mainMod, mouse_down, workspace, e+1"
                 "$mainMod, mouse_up, workspace, e-1"
+
                 "$mainMod, h, movefocus, l"
                 "$mainMod, j, movefocus, d"
                 "$mainMod, k, movefocus, u"
                 "$mainMod, l, movefocus, r"
+
+                "$mainMod SHIFT, h, movewindow, l"
+                "$mainMod SHIFT, j, movewindow, d"
+                "$mainMod SHIFT, k, movewindow, u"
+                "$mainMod SHIFT, l, movewindow, r"
+
+                "$mainMod SUPER, h, resizeactive, -10 0"
+                "$mainMod SUPER, j, resizeactive, 0 10"
+                "$mainMod SUPER, k, resizeactive, 0 -10"
+                "$mainMod SUPER, l, resizeactive, 10 0"
             ] ++ mkMvWindowCmds ++ mkSwitchWkspCmds;
 
             bindm = [
