@@ -19,12 +19,22 @@ in
 {
     home = {
 		packages = with pkgs; [
-            mako
             libnotify
             rofi-wayland
             brightnessctl
             hyprshot
 		];
+    };
+
+    services.mako = {
+        enable = true;
+        font = "JetBrains Mono 8";
+        defaultTimeout = 10000;
+        backgroundColor = "#282828";
+        borderColor = "#8ec07c";
+        textColor = "#ebdbb2";
+        borderRadius = 5;
+        format = "%s\\n%b";
     };
 
     home.pointerCursor = {

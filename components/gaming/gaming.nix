@@ -5,6 +5,7 @@
         mangohud
         protonup
         discord
+        spotube
     ];
 
     # Steam Setup
