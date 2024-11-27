@@ -67,7 +67,9 @@
 		isNormalUser = true;
 		description = "Luke Olson";
 		extraGroups = [ "networkmanager" "wheel" ];
-		packages = with pkgs; [];
+		packages = with pkgs; [
+            qalculate-qt
+        ];
 	};
 
 	# Lets use some flakes baybee
@@ -135,6 +137,7 @@
 		packages = with pkgs; [
 			iosevka
 			(nerdfonts.override { fonts = [ "Iosevka" ]; })	
+            jetbrains-mono
 		];
 
 		fontconfig = {

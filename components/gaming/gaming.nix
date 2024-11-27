@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-    environment.systemPackages  = with pkgs; [
+    environment.systemPackages = with pkgs; [
         mangohud
         protonup
-	discord
+        discord
     ];
 
     # Steam Setup

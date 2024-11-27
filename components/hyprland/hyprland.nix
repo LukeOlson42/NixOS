@@ -152,6 +152,8 @@ in
                 "$mainMod, J, togglesplit"
                 "$mainMod, P, pseudo"
                 "$winShift, S, exec, hyprshot -o $ssLocation -m region"
+                "$mod, L, exec, hyprlock"
+                "$mainMod, C, exec, [floating] qalculate-qt"
 
                 # Movement Keybinds
                 "$mainMod, mouse_down, workspace, e+1"
@@ -171,6 +173,10 @@ in
                 "$mainMod SUPER, j, resizeactive, 0 10"
                 "$mainMod SUPER, k, resizeactive, 0 -10"
                 "$mainMod SUPER, l, resizeactive, 10 0"
+
+                # tab cycling
+                "$mainMod, Tab, cyclenext"
+                "$mainMod, Tab, bringactivetotop"
             ] ++ mkMvWindowCmds ++ mkSwitchWkspCmds;
 
             bindm = [
@@ -236,6 +242,86 @@ in
 
             # This may have to change between machines, later problem
             monitor = "eDP-1, 1920x1080@60, 0x0, 1";
+        };
+    };
+    
+    services.hypridle = {
+        enable = true;
+        settings = {
+            listener = [
+                {
+                    timeout = 300;
+                    on-timeout = "exec hyprlock";
+                }
+            ];
+        };
+    };
+
+    programs.hyprlock = {
+        enable = true;
+        settings = {
+            general = {
+                disable_loading_bar = true;
+                grace = 0;
+                hide_cursor = false;
+                no_fade_in = false;
+                no_fade_out = false;
+            };
+
+            background = [
+                {
+                    path =  "${config.home.homeDirectory}/NixOS/wallpapers/jungle_mountains.jpg";
+                    blur_passes = 2;
+                    blur_size = 8;
+                }
+            ];
+
+            input-field = [
+                {
+                    monitor = "";
+                    size = "188, 45";
+                    outline_thickness = 2;
+                    dots_size = 0.2;
+                    dots_spacing = 0.35;
+                    dots_center = true;
+                    outer_color = "rgba(0, 0, 0, 0)";
+                    inner_color = "rgba(0, 0, 0, 0.2)";
+                    font_color = "rgb(235, 219, 178)";
+                    fade_on_empty = false;
+                    rounding = -1;
+                    check_color = "rgb(251, 73, 52)";
+                    placeholder_text = "<i><span foreground=\"##ebdbb2\">Input Password...</span></i>";
+                    position = "0, -200";
+                    halign = "center";
+                    valign = "center";
+                }
+            ];
+
+# #ebdbb2
+            label = [
+                # Clock
+                {
+                    monitor = "";
+                    text = "cmd[update:1000] date +\"%-I:%M%p\"";
+                    color = "rgba(235, 219, 178, 0.75)";
+                    font_size = 95;
+                    font_family = "JetBrains Mono Extrabold";
+                    position = "0, 200";
+                    halign = "center";
+                    valign = "center";
+                }
+                # Date
+                {
+                    monitor = "";
+                    text = "cmd[update:1000] date +\"%A, %B %d\"";
+                    color = "rgba(235, 219, 178, 0.75)";
+                    font_size = 22;
+                    font_family = "JetBrains Mono";
+                    position = "0, 300";
+                    halign = "center";
+                    valign = "center";
+                }
+            ];
         };
     };
 }
