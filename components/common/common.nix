@@ -15,10 +15,17 @@
 
             # GCC, just in case ;)
             gcc 
-            btop
             cowsay
 		];
 	};
+
+    programs.btop = {
+        enable = true;
+        settings = {
+            vim_keys = true;
+            color_theme = "gruvbox_dark_v2";
+        };
+    };
 
     programs.git = {
         enable = true;
