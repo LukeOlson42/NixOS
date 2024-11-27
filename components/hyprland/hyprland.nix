@@ -23,6 +23,7 @@ in
             libnotify
             rofi-wayland
             brightnessctl
+            hyprshot
 		];
     };
 
@@ -129,12 +130,14 @@ in
         settings = {
             # Hyprland Variables !!
             "$mainMod" = "ALT";
+            "$winShift" = "SUPER_SHIFT";
             "$mod" = "SUPER";
             "$terminal" = "alacritty";
             "$browser" = "firefox";
             "$editor" = "nvim";
             "$fileManager" = "yazi";
             "$menu" = "rofi -show drun";
+            "$ssLocation" = "~/screenshots/";
 
             # Keybinds !!
             bind = [
@@ -148,6 +151,7 @@ in
                 "$mainMod, V, togglefloating"
                 "$mainMod, J, togglesplit"
                 "$mainMod, P, pseudo"
+                "$winShift, S, exec, hyprshot -o $ssLocation -m region"
 
                 # Movement Keybinds
                 "$mainMod, mouse_down, workspace, e+1"

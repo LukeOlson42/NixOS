@@ -5,7 +5,7 @@ local lualine = require('lualine')
 local config = {
     options = {
         icons_enabled = false,
-        theme = 'sonokai',
+        theme = 'gruvbox',
         component_separators = '|',
         section_separators = '',
         disabled_filetypes = {
@@ -16,7 +16,7 @@ local config = {
         always_divide_middle = true,
         globalstatus = false,
         refresh = {
-            statusline = 1000,
+            statusline = 100,
         }
     },
     sections = {

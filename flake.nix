@@ -27,12 +27,12 @@
 	{
 		nixosConfigurations = {
             asusLaptop = mkSystem ./machines/asus_laptop/asus_laptop.nix;
-            # mainDesktop = mkSystem ./machines/desktop/desktop.nix;
+            mainDesktop = mkSystem ./machines/desktop/desktop.nix;
 		};
 
         homeConfigurations = {
             "lukeolson@nixon" = mkHome "x86_64-linux" ./profiles/lukeolson.nix;
-            # "lukeolson@desktop" = mkHome "x86_64-linux" ./modules/home.nix;
+            "lukeolson@nixos-desktop" = mkHome "x86_64-linux" ./profiles/lukeolson.nix;
         };
 	};
 }
