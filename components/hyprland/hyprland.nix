@@ -39,9 +39,9 @@ in
 
     home.pointerCursor = {
         gtk.enable = true;
-        package = pkgs.capitaine-cursors-themed;
-        name = "Capitaine Cursors (Gruvbox)";
-        size = 10;
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+        size = 8;
     };
 
     programs.rofi = {
