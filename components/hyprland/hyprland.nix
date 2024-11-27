@@ -39,15 +39,15 @@ in
 
     home.pointerCursor = {
         gtk.enable = true;
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Ice";
+        package = pkgs.capitaine-cursors-themed;
+        name = "Capitaine Cursors (Gruvbox)";
         size = 10;
     };
 
     programs.rofi = {
         enable = true;
         terminal = "alacritty";
-        font = "Iosevka 12";
+        font = "JetBrains Mono 12";
         theme = "gruvbox-dark";
         package = pkgs.rofi-wayland;
     };
