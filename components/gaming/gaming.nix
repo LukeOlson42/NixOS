@@ -5,6 +5,7 @@
         mangohud
         protonup
         discord
+        r2modman
         spotube
     ];
 
