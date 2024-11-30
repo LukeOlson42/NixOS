@@ -23,9 +23,14 @@ shutdown=' '
 reboot=' '
 lock=' '
 logout='󰍃 '
+logout='󰍃 '
 
 yes=' '
 no=' '
+
+toggle_bluetooth() {
+
+}
 
 # Rofi CMD
 rofi_cmd() {
@@ -61,7 +66,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$logout\n$reboot\n$shutdown" | rofi_cmd
+	echo -e "$lock\n$logout\n$reboot\n$shutdown\n$bluetooth" | rofi_cmd
 }
 
 # Execute Command

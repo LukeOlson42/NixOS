@@ -71,16 +71,17 @@ in
         enable = true;        
         style = ./waybar/style.css;
         settings = [{
-            layer = "top";
+            layer = "bottom";
             modules-left =  ["hyprland/workspaces"];
             modules-center = [ "custom/logo" ];
             modules-right = [
                 "tray"
                 "cpu"
                 "memory"
-                "backlight"
+                "bluetooth"
                 "network"
                 "pulseaudio"
+                "backlight"
                 "battery"
                 "clock"
             ];
@@ -132,6 +133,9 @@ in
                     default = ["" ""];
                 };
                 on-click = "pavucontrol";
+            };
+            bluetooth = {
+                on-click = "blueman-manager";
             };
         }];
     };

@@ -30,7 +30,7 @@ window#waybar {
     background-color: #bf616a;
 }
 
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio {
+#clock, #bluetooth, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio {
     padding: 0 10px;
     margin: 0 2px;
     background: transparent;
@@ -53,6 +53,10 @@ window#waybar {
 }
 
 #backlight {
+    border-bottom: 2px solid #fadb2f;
+}
+
+#bluetooth {
     border-bottom: 2px solid #fadb2f;
 }
 

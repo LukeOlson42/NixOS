@@ -118,6 +118,14 @@
     programs.hyprland.enable = true;
     programs.hyprland.xwayland.enable = true;
 
+    hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+    };
+    services.blueman = {
+        enable = true;
+    };
+
     hardware.graphics = {
         enable = true;
         enable32Bit = true;
