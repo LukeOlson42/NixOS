@@ -48,7 +48,7 @@ in
         enable = true;
         terminal = "alacritty";
         font = "JetBrains Mono 12";
-        theme = "gruvbox-dark";
+        theme = ./rofi/launcher.rasi;
         package = pkgs.rofi-wayland;
     };
 
@@ -91,6 +91,7 @@ in
             };
             "custom/logo" = {
                 format = " ";
+                on-click = "~/NixOS/components/hyprland/rofi/powermenu.sh";
             };
             tray = {
                 # "icon-size" = 21,
@@ -179,10 +180,10 @@ in
                 "$mainMod SHIFT, k, movewindow, u"
                 "$mainMod SHIFT, l, movewindow, r"
 
-                "$mainMod SUPER, h, resizeactive, -10 0"
-                "$mainMod SUPER, j, resizeactive, 0 10"
-                "$mainMod SUPER, k, resizeactive, 0 -10"
-                "$mainMod SUPER, l, resizeactive, 10 0"
+                "$mainMod SUPER, h, resizeactive, -20 0"
+                "$mainMod SUPER, j, resizeactive, 0 20"
+                "$mainMod SUPER, k, resizeactive, 0 -20"
+                "$mainMod SUPER, l, resizeactive, 20 0"
 
                 # tab cycling
                 "$mainMod, Tab, cyclenext"
