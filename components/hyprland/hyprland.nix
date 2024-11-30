@@ -95,13 +95,33 @@ in
                 on-click = "~/NixOS/components/hyprland/rofi/powermenu.sh";
             };
             tray = {
-                # "icon-size" = 21,
-                spacing = 12;
+                spacing = 10;
             };
             clock = {
-                tooltip-format = "{:%m-%d-%Y | %H:%M}";
-                format-alt = "{:%Y-%m-%d}";
-                format = "{:%a %m-%d-%Y - %H:%M %p}";
+                interval = 1;
+                tooltip-format = "{calendar}";
+                format = "{:%H:%M:%S}";
+                format-alt = "{:%A, %B %d, %Y (%R)}";
+
+                calendar = {
+                    mode = "year";
+                    mode-mon-col = 3; 
+                    weeks-pos = "right";
+                    on-scroll = 1;
+                    format = {
+                        months = "<span color='#ebdbb2'><b>{}</b></span";
+                        days = "<span color='#ebdbb2'><b>{}</b></span";
+                        weeks = "<span color='#8ec07c'><b>W{}</b></span";
+                        weekdays = "<span color='#fabd2f'><b>{}</b></span";
+                        today = "<span color='#d3869b'><b><u>{}</u></b></span";
+                    };
+                };
+
+                actions = {
+                    on-click-right = "mode";
+                    on-scroll-up = "shift_up";
+                    on-scroll-down = "shift_down";
+                };
             };
             cpu = {
                 format = "CPU: {usage}%";
@@ -119,7 +139,7 @@ in
             };
             network = {
                 format-wifi = "WiFi: {signalStrength}%";
-                format-ethernet = "{ifname}: {ipaddr}/{cidr} ethernet";
+                format-ethernet = "Wired: {bandwidthDownBits}   {bandwidthUpBits}  ";
                 format-disconnected = "Down";
             };
             pulseaudio = {
@@ -138,6 +158,12 @@ in
                 on-click = "blueman-manager";
             };
         }];
+    };
+
+    services.gammastep = {
+        enable = true;
+        latitude = 42.972218;
+        longitude = 85.951547;
     };
 
     wayland.windowManager.hyprland = {
@@ -265,7 +291,7 @@ in
         settings = {
             listener = [
                 {
-                    timeout = 300;
+                    timeout = 600;
                     on-timeout = "exec hyprlock";
                 }
             ];

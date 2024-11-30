@@ -7,6 +7,7 @@
         discord
         r2modman
         spotube
+        linuxKernel.packages.linux_xanmod_stable.xpadneo
     ];
 
     # Steam Setup

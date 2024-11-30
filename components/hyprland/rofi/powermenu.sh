@@ -28,10 +28,6 @@ logout='󰍃 '
 yes=' '
 no=' '
 
-toggle_bluetooth() {
-
-}
-
 # Rofi CMD
 rofi_cmd() {
 	rofi -dmenu \
