@@ -23,6 +23,7 @@ in
             rofi-wayland
             brightnessctl
             hyprshot
+            pavucontrol
 		];
     };
 
