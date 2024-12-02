@@ -269,6 +269,7 @@ in
                 sensitivity = 0.0;
                 follow_mouse = 1;
                 kb_options = "ctrl:nocaps";
+                repeat_delay = 250;
             };
 
             dwindle = {
