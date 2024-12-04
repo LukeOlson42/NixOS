@@ -22,8 +22,7 @@ host=`hostname`
 shutdown=' '
 reboot=' '
 lock=' '
-logout='󰍃 '
-logout='󰍃 '
+logout='󰍃'
 
 yes=' '
 no=' '
@@ -62,7 +61,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$logout\n$reboot\n$shutdown\n$bluetooth" | rofi_cmd
+	echo -e "$lock\n$logout\n$reboot\n$shutdown" | rofi_cmd
 }
 
 # Execute Command

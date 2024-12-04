@@ -2,10 +2,18 @@
 
 {
     environment.systemPackages = with pkgs; [
+        # For Steam
         mangohud
         protonup
+
+        # For Discord
         discord
+
+        # For Spotify
         spotify
+        playerctl
+
+        # For Miscellaneous
         r2modman
         linuxKernel.packages.linux_xanmod_stable.xpadneo
     ];

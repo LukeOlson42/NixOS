@@ -79,11 +79,12 @@ in
                 "tray"
                 "cpu"
                 "memory"
-                "bluetooth"
+                "custom/spotify"
                 "network"
                 "pulseaudio"
-                "backlight"
-                "battery"
+                # Removed for now, maybe we can configure based on build name?
+                # "backlight"
+                # "battery"
                 "clock"
             ];
             "hyprland/workspaces" = {
@@ -95,34 +96,25 @@ in
                 format = " ";
                 on-click = "~/NixOS/components/hyprland/rofi/powermenu.sh";
             };
+            "custom/spotify" = {
+                exec = "~/NixOS/components/hyprland/waybar/spotify/metadata.sh";
+                max-length = 60;
+                return-type = "json";
+                format = "{} ";
+                on-click = "~/NixOS/components/hyprland/waybar/spotify/controls.sh";
+                on-scroll-up = "~/NixOS/components/hyprland/waybar/spotify/controls.sh next ";
+                on-scroll-down = "~/NixOS/components/hyprland/waybar/spotify/controls.sh previous";
+                signal = 5;
+                smooth-scrolling-threshold = 1.0;
+                interval = 30;
+            };
             tray = {
                 spacing = 10;
             };
             clock = {
                 interval = 1;
-                tooltip-format = "{calendar}";
                 format = "{:%H:%M:%S}";
                 format-alt = "{:%A, %B %d, %Y (%R)}";
-
-                calendar = {
-                    mode = "year";
-                    mode-mon-col = 3; 
-                    weeks-pos = "right";
-                    on-scroll = 1;
-                    format = {
-                        months = "<span color='#ebdbb2'><b>{}</b></span";
-                        days = "<span color='#ebdbb2'><b>{}</b></span";
-                        weeks = "<span color='#8ec07c'><b>W{}</b></span";
-                        weekdays = "<span color='#fabd2f'><b>{}</b></span";
-                        today = "<span color='#d3869b'><b><u>{}</u></b></span";
-                    };
-                };
-
-                actions = {
-                    on-click-right = "mode";
-                    on-scroll-up = "shift_up";
-                    on-scroll-down = "shift_down";
-                };
             };
             cpu = {
                 format = "CPU: {usage}%";
@@ -140,13 +132,12 @@ in
             };
             network = {
                 format-wifi = "WiFi: {signalStrength}%";
-                format-ethernet = "Wired: {bandwidthDownBits}   {bandwidthUpBits}  ";
+                format-ethernet = "{bandwidthDownBits}   {bandwidthUpBits}  ";
                 format-disconnected = "Down";
             };
             pulseaudio = {
                 # scroll-step = 1,
                 format = "　{volume}%";
-                format-bluetooth = "{volume}% {icon}";
                 format-muted = "Mute";
                 format-icons = {
                     headphones = "";
@@ -154,9 +145,6 @@ in
                     default = ["" ""];
                 };
                 on-click = "pavucontrol";
-            };
-            bluetooth = {
-                on-click = "blueman-manager";
             };
         }];
     };
@@ -225,6 +213,8 @@ in
                 # Move and Resize Windows
                 "$mainMod, mouse:272, movewindow"
                 "$mainMod, mouse:273, resizewindow"
+                "$mainMod, mouse:276, movewindow"
+                "$mainMod, mouse:275, resizewindow"
             ];
 
             binde = [
@@ -284,7 +274,7 @@ in
             ];
 
             # This may have to change between machines, later problem
-            monitor = "eDP-1, 1920x1080@60, 0x0, 1";
+            monitor = "eDP-1, 1920x1080@60, 0x0, 1, bitdepth, 10";
         };
     };
     
