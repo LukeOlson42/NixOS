@@ -7,7 +7,7 @@ then
     exit
 fi
 
-if [[ $1 == "prev" ]]
+if [[ $1 == "previous" ]]
 then
    playerctl -p spotify previous
    sleep .1
