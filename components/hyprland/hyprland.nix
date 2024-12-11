@@ -79,7 +79,7 @@ in
                 "tray"
                 "cpu"
                 "memory"
-                "custom/spotify"
+                "idle_inhibitor"
                 "network"
                 "pulseaudio"
                 # Removed for now, maybe we can configure based on build name?
@@ -96,17 +96,26 @@ in
                 format = " ";
                 on-click = "~/NixOS/components/hyprland/rofi/powermenu.sh";
             };
-            "custom/spotify" = {
-                exec = "~/NixOS/components/hyprland/waybar/spotify/metadata.sh";
-                max-length = 60;
-                return-type = "json";
-                format = "{} ";
-                on-click = "~/NixOS/components/hyprland/waybar/spotify/controls.sh";
-                on-scroll-up = "~/NixOS/components/hyprland/waybar/spotify/controls.sh next ";
-                on-scroll-down = "~/NixOS/components/hyprland/waybar/spotify/controls.sh previous";
-                signal = 5;
-                smooth-scrolling-threshold = 1.0;
-                interval = 30;
+#             "custom/spotify" = {
+#                 exec = "~/NixOS/components/hyprland/waybar/spotify/metadata.sh";
+#                 max-length = 40;
+#                 return-type = "json";
+#                 format = "{} ";
+#                 on-click = "~/NixOS/components/hyprland/waybar/spotify/controls.sh";
+#                 on-scroll-up = "~/NixOS/components/hyprland/waybar/spotify/controls.sh next ";
+#                 on-scroll-down = "~/NixOS/components/hyprland/waybar/spotify/controls.sh previous";
+#                 signal = 5;
+#                 smooth-scrolling-threshold = 1.0;
+#                 interval = 60;
+#             };
+            idle_inhibitor = {
+                format = "{icon}";
+                format-icons = {
+                    activated = " ";
+                    deactivated = " ";
+                };
+                tooltip-format-activated = "Idle Inhibited";
+                tooltip-format-deactivated = "Idle Not Inhibited";
             };
             tray = {
                 spacing = 10;
@@ -213,8 +222,8 @@ in
                 # Move and Resize Windows
                 "$mainMod, mouse:272, movewindow"
                 "$mainMod, mouse:273, resizewindow"
-                "$mainMod, mouse:276, movewindow"
-                "$mainMod, mouse:275, resizewindow"
+                ", mouse:276, movewindow"
+                ", mouse:275, resizewindow"
             ];
 
             binde = [
@@ -353,6 +362,17 @@ in
                     position = "0, 300";
                     halign = "center";
                     valign = "center";
+                }
+                # Current Song
+                {
+                    monitor = "";
+                    text = "cmd[update:1000] echo \"$(~/NixOS/components/hyprland/waybar/spotify/metadata.sh query)";
+                    color = "rgba(235, 219, 178, 0.75)";
+                    font_size = 14;
+                    font_family = "JetBrains Mono";
+                    position = "0, -10";
+                    halign = "center";
+                    valign = "top";
                 }
             ];
         };

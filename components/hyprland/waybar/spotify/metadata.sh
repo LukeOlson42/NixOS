@@ -13,6 +13,12 @@ then
    exit
 fi
 
+if [[ $1 == "query" ]]
+then
+    echo "$title - $artist "
+    exit
+fi
+
 if [[ $status == "Playing" ]]
 then
    echo "{\"class\": \"playing\", \"text\": \"$artist - $title\", \"tooltip\": \"$artist - $title - $album\"}"
@@ -26,4 +32,5 @@ then
    pkill -RTMIN+5 waybar
    exit
 fi
+
 
