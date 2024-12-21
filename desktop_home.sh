@@ -5,4 +5,4 @@ dir=$(pwd)
 
 echo ${dir}
 
-home-manager switch --flake ${dir}/#lukeolson@nixos-desktop --show-trace
+home-manager switch --flake ${dir}/#lukeolson@nixos-desktop --show-trace --impure

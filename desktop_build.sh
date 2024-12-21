@@ -5,4 +5,4 @@ dir=$(pwd)
 
 echo ${dir}
 
-sudo nixos-rebuild switch --flake ${dir}/#mainDesktop --show-trace
+sudo nixos-rebuild switch --flake ${dir}/#mainDesktop --show-trace --impure

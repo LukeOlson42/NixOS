@@ -15,7 +15,7 @@ fi
 
 if [[ $1 == "query" ]]
 then
-    echo "$title - $artist "
+    echo "  $title :: $artist"
     exit
 fi
 

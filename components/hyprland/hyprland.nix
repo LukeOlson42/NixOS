@@ -185,7 +185,7 @@ in
                 "$mainMod, O, exec, $terminal -e $fileManager"
                 "$mainMod, Return, exec, $terminal"
                 "$mainMod, M, exit"
-                "$mainMod, R, exec, $menu"
+                "$mainMod, SPACE, exec, $menu"
                 "$mainMod, Q, killactive"
                 "$mainMod, V, togglefloating"
                 "$mainMod, J, togglesplit"
@@ -366,13 +366,13 @@ in
                 # Current Song
                 {
                     monitor = "";
-                    text = "cmd[update:1000] echo \"$(~/NixOS/components/hyprland/waybar/spotify/metadata.sh query)";
+                    text = "cmd[update:1000] echo \"$(~/NixOS/components/hyprland/waybar/spotify/metadata.sh query)\"";
                     color = "rgba(235, 219, 178, 0.75)";
                     font_size = 14;
                     font_family = "JetBrains Mono";
-                    position = "0, -10";
+                    position = "0, 20";
                     halign = "center";
-                    valign = "top";
+                    valign = "bottom";
                 }
             ];
         };

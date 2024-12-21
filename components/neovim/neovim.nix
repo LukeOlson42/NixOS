@@ -10,8 +10,8 @@
 	# I use neovim on multiple platforms, so this
 	# lets me use the same Lua config :3
 	xdg.configFile = {
-		"nvim/lua".source = ./config/lua;
-		"nvim/init.lua".source = ./config/init.lua;
+		"nvim/lua".source =  /. + "/home/lukeolson/config.nvim/lua";
+		"nvim/init.lua".source = /. + "/home/lukeolson/config.nvim/init.lua";
 	};
 
 	programs.neovim = {

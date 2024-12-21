@@ -28,6 +28,14 @@
             canTouchEfiVariables = true;
             efiSysMountPoint = "/boot";
         };
+        grub.extraEntries = ''
+            menuentry "Reboot" {
+                reboot
+            }
+            menuentry "Power Off" {
+                halt
+            }
+        '';
     };
 
     boot.initrd = {
