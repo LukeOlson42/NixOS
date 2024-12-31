@@ -5,6 +5,7 @@
 	home.packages = with pkgs; [
 		ripgrep
 		fd
+        lua-language-server
 	];
 
 	# I use neovim on multiple platforms, so this

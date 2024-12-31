@@ -19,8 +19,13 @@
                     gdb
                     gnumake
                     cmake
+                    zsh
                 ];
             };
+
+            shellHook = ''
+                echo "C Shell - GCC, GDB, Make, CMake"
+            '';
         }
     );
 }

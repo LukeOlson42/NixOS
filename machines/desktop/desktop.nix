@@ -13,6 +13,7 @@
 		inputs.home-manager.nixosModules.home-manager
 
         ../../components/gaming/gaming.nix
+        ../../components/minecraft/minecraft.nix
 	];
 
 	# Bootloader
