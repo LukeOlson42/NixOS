@@ -6,8 +6,8 @@
         mangohud
         protonup
 
-        # For Discord
-        discord
+        wireplumber
+        vesktop
 
         # For Spotify
         spotify

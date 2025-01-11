@@ -143,6 +143,7 @@ in
                 format-wifi = "WiFi: {signalStrength}%";
                 format-ethernet = "{bandwidthDownBits}   {bandwidthUpBits}  ";
                 format-disconnected = "Down";
+                interval = 1;
             };
             pulseaudio = {
                 # scroll-step = 1,
@@ -166,6 +167,7 @@ in
 
     wayland.windowManager.hyprland = {
         enable = true;
+        systemd.enable = true;
         settings = {
             # Hyprland Variables !!
             "$mainMod" = "ALT";
@@ -181,7 +183,6 @@ in
             # Keybinds !!
             bind = [
                 # General Keybinds
-                "$mainMod, F, exec, $browser"
                 "$mainMod, O, exec, $terminal -e $fileManager"
                 "$mainMod, Return, exec, $terminal"
                 "$mainMod, M, exit"
@@ -254,7 +255,15 @@ in
             };
 
             # Do we need this?
-            "windowrulev2" = "suppressevent maximize, class:.*";
+            "windowrulev2" = [
+                "suppressevent maximize, class:.*"
+                "opacity 0.0 override, class:^(xwaylandvideobridge)$"
+                "noanim, class:^(xwaylandvideobridge)$"
+                "noinitialfocus, class:^(xwaylandvideobridge)$"
+                "maxsize 1 1, class:^(xwaylandvideobridge)$"
+                "noblur, class:^(xwaylandvideobridge)$"
+                "nofocus, class:^(xwaylandvideobridge)$"
+            ];
 
             decoration = {
                 rounding = 5;
@@ -280,6 +289,7 @@ in
             exec-once = [
                 "wpaperd"
                 "waybar"
+                "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
             ];
 
             # This may have to change between machines, later problem

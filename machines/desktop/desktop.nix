@@ -14,6 +14,7 @@
 
         ../../components/gaming/gaming.nix
         ../../components/minecraft/minecraft.nix
+        ../../components/docker/docker.nix
 	];
 
 	# Bootloader
@@ -127,6 +128,21 @@
     programs.hyprland.enable = true;
     programs.hyprland.xwayland.enable = true;
 
+    xdg = {
+        portal = {
+            enable = true;
+            xdgOpenUsePortal = true;
+            config = {
+                common.default = ["gtk"];
+                hyprland.default = ["gtk" "hyprland"];
+            };
+            extraPortals = [
+                pkgs.xdg-desktop-portal-gtk
+                pkgs.xdg-desktop-portal-hyprland
+            ];
+        };
+    };
+
     hardware.bluetooth = {
         enable = true;
         powerOnBoot = true;
@@ -164,11 +180,24 @@
 		};
 	};
 
-	environment.variables = {
-		EDITOR = "nvim";
-		VISUAL = "nvim";
-		TERM = "alacritty";
-		SHELL = "zsh";
+	environment = {
+        variables = {
+            EDITOR = "nvim";
+            VISUAL = "nvim";
+            TERM = "alacritty";
+            SHELL = "zsh";
+          XDG_CURRENT_DESKTOP = "Hyprland";
+          XDG_SESSION_TYPE = "wayland";
+          XDG_SESSION_DESKTOP = "Hyprland";
+        };
+        # these may work?
+        sessionVariables = {
+            MOZ_ENABLE_WAYLAND = "1";
+            NIXOS_OZONE_WL = "1";
+            T_QPA_PLATFORM = "wayland";
+            GDK_BACKEND = "wayland";
+            WLR_NO_HARDWARE_CURSORS = "1";
+        };
 	};
 
 	system.stateVersion = "24.11"; 
