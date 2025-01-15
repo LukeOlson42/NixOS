@@ -8,6 +8,15 @@
     /* test: ""; */
 }
 
+/*black = "#282c34";*/
+/*white = "#bcbfc4";*/
+/*red = "#e06c75";*/
+/*green = "#98c379";*/
+/*yellow = "#e5c07b";*/
+/*blue = "#61afe7";*/
+/*magenta = "#c688cd";*/
+/*cyan = "#56b6c2";*/
+
 window#waybar {
     background: rgba(40, 40, 40, 0.7);
     border: 0px;
@@ -46,11 +55,11 @@ window#waybar {
 }
 
 #cpu {
-    border-bottom: 2px solid #fb4934;
+    border-bottom: 2px solid #e06c75;
 }
 
 #memory {
-    border-bottom: 2px solid #fe8019;
+    border-bottom: 2px solid #ee9360;
 }
 
 #backlight {
@@ -58,24 +67,24 @@ window#waybar {
 }
 
 #idle_inhibitor {
-    border-bottom: 2px solid #fadb2f;
+    border-bottom: 2px solid #e5c07b;
 }
 
 #network {
-    border-bottom: 2px solid #b8bb26;
+    border-bottom: 2px solid #98c379;
 }
 
 #network.disconnected {
     color: #fb4934;
-    border-bottom: 2px solid #b8bb26;
+    border-bottom: 2px solid #98c379;
 }
 
 #pulseaudio {
-    border-bottom: 2px solid #8ec07c;
+    border-bottom: 2px solid #61afe7;
 }
 
 #pulseaudio.muted {
-    border-bottom: 2px solid #8ec07c;
+    border-bottom: 2px solid #61afe7;
     color: #fb4934;
 }
 

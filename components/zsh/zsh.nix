@@ -3,7 +3,7 @@
 let
     zshTheme = ''
         autoload -U colors && colors
-        PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$fg[green]%} $%b '
+        PROMPT='%B%{$fg[white]%}[%{$fg[green]%}%n%{$fg[white]%}@%{$fg[green]%}%M %{$fg[green]%}%~%{$fg[white]%}]%{$fg[white]%} $%b '
     '';
 in
 {
