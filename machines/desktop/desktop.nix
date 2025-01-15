@@ -73,13 +73,20 @@
 	};
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
-	users.users.lukeolson = {
-		isNormalUser = true;
-		description = "Luke Olson";
-		extraGroups = [ "networkmanager" "wheel" ];
-		packages = with pkgs; [
-            qalculate-qt
-        ];
+	users = {
+        groups = {
+            docker = {
+                members = [ "lukeolson" ];
+            };
+        };
+        users.lukeolson = {
+            isNormalUser = true;
+            description = "Luke Olson";
+            extraGroups = [ "networkmanager" "wheel" "docker" ];
+            packages = with pkgs; [
+                qalculate-qt
+            ];
+        };
 	};
 
 	# Lets use some flakes baybee
@@ -164,7 +171,6 @@
         };
 	};
 
-	# Set font to Iosevka
 	fonts = {
 		enableDefaultPackages = true;
 		packages = with pkgs; [
@@ -175,7 +181,8 @@
 
 		fontconfig = {
 			defaultFonts = {
-				monospace = [ "Iosevka Mono" ];
+				# monospace = [ "Iosevka Mono" ];
+				monospace = [ "JetBrains Mono" ];
 			};
 		};
 	};

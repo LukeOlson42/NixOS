@@ -5,10 +5,10 @@
 		enable = true;
 		settings = {
 			font = {
-				size = 12;
-				normal.family = "Iosevka Nerd Font";
-				bold.family = "Iosevka Nerd Font";
-				italic.family = "Iosevka Nerd Font";
+				size = 10;
+				normal.family = "JetBrains Mono";
+				bold.family = "JetBrains Mono";
+				italic.family = "JetBrains Mono";
 			};
 
             colors = {
