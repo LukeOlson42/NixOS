@@ -15,6 +15,7 @@
         ../../components/gaming/gaming.nix
         ../../components/minecraft/minecraft.nix
         ../../components/docker/docker.nix
+        ../../components/nemo/nemo.nix
 	];
 
 	# Bootloader

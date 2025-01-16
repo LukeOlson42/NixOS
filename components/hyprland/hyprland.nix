@@ -176,24 +176,24 @@ in
             "$terminal" = "alacritty";
             "$browser" = "firefox";
             "$editor" = "nvim";
-            "$fileManager" = "yazi";
+            "$fileManager" = "nemo";
             "$menu" = "rofi -show drun";
             "$ssLocation" = "~/screenshots/";
 
             # Keybinds !!
             bind = [
                 # General Keybinds
-                "$mainMod, O, exec, $terminal -e $fileManager"
                 "$mainMod, Return, exec, $terminal"
                 "$mainMod, M, exit"
                 "$mainMod, SPACE, exec, $menu"
                 "$mainMod, Q, killactive"
-                "$mainMod, V, togglefloating"
-                "$mainMod, J, togglesplit"
+                "$mainMod, A, togglefloating"
+                "$mainMod, F, togglesplit"
                 "$mainMod, P, pseudo"
                 "$winShift, S, exec, hyprshot -o $ssLocation -m region"
-                "$mod, L, exec, hyprlock"
+                "$mainMod, L, exec, hyprlock"
                 "$mainMod, C, exec, [floating] qalculate-qt"
+                "$mainMod, O, exec, [floating] nemo"
 
                 # Movement Keybinds
                 "$mainMod, mouse_down, workspace, e+1"

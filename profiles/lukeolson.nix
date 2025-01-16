@@ -15,7 +15,6 @@
         ../components/alacritty/alacritty.nix 
         ../components/hyprland/hyprland.nix 
         ../components/neovim/neovim.nix 
-        ../components/yazi/yazi.nix 
         ../components/sioyek/sioyek.nix 
         ../components/zsh/zsh.nix 
     ];
