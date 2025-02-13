@@ -1,9 +1,10 @@
-{ lib, user, pkgs, ... }:
+{ inputs, lib, user, pkgs, ... }:
 
 {
 	imports = [ 
         # Include the results of the hardware scan.
 		./desktop-hardware.nix
+        inputs.sddm-sugar-candy-nix.nixosModules.default
 	];
 
 	# Bootloader
@@ -68,6 +69,9 @@
         videoDrivers = [ "amdgpu" ];
     };
 
+    programs.hyprland.enable = true;
+    programs.hyprland.xwayland.enable = true;
+
     xdg = {
         portal = {
             enable = true;
@@ -80,6 +84,24 @@
                 pkgs.xdg-desktop-portal-gtk
                 pkgs.xdg-desktop-portal-hyprland
             ];
+        };
+    };
+
+    services.displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+        autoNumlock = true;
+
+        sugarCandyNix = {
+            enable = true;
+            settings = {
+                Background   = lib.cleanSource ../../wallpapers/halfdome.jpg;
+                ScreenWidth  = 1920;
+                ScreenHeight = 1080;
+                FormPosition = "left";
+                HaveFormBackground = true;
+                PartialBlur = true;
+            };
         };
     };
 

@@ -1,4 +1,4 @@
-{ config, pkgs, osConfig, ... }:
+{ inputs, config, pkgs, osConfig, ... }:
 let
     mkSwitchWkspCmds =
         builtins.concatLists (builtins.genList (i:
@@ -18,13 +18,13 @@ let
 in
 {
     home = {
-		packages = with pkgs; [
+        packages = with pkgs; [
             libnotify
-            rofi-wayland
-            brightnessctl
-            hyprshot
-            pavucontrol
-		];
+                rofi-wayland
+                brightnessctl
+                hyprshot
+                pavucontrol
+        ];
     };
 
     services.mako = {
@@ -77,15 +77,15 @@ in
             modules-center = [ "custom/logo" ];
             modules-right = [
                 "tray"
-                "cpu"
-                "memory"
-                "idle_inhibitor"
-                "network"
-                "pulseaudio"
-                # Removed for now, maybe we can configure based on build name?
-                # "backlight"
-                # "battery"
-                "clock"
+                    "cpu"
+                    "memory"
+                    "idle_inhibitor"
+                    "network"
+                    "pulseaudio"
+# Removed for now, maybe we can configure based on build name?
+# "backlight"
+# "battery"
+                    "clock"
             ];
             "hyprland/workspaces" = {
                 format = "{icon}";
@@ -132,7 +132,7 @@ in
                 format = "RAM: {}%";
             };
             backlight = {
-                # device = "intel_backlight";
+# device = "intel_backlight";
                 format = "　{percent}%";
                 format-icons = ["" ""];
             };
@@ -146,7 +146,7 @@ in
                 interval = 1;
             };
             pulseaudio = {
-                # scroll-step = 1,
+# scroll-step = 1,
                 format = "　{volume}%";
                 format-muted = "Mute";
                 format-icons = {
@@ -172,9 +172,12 @@ in
 
     wayland.windowManager.hyprland = {
         enable = true;
+        xwayland.enable = true;
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         systemd.enable = true;
         settings = {
-            # Hyprland Variables !!
+# Hyprland Variables !!
             "$mainMod" = "ALT";
             "$winShift" = "SUPER_SHIFT";
             "$mod" = "SUPER";
@@ -185,62 +188,62 @@ in
             "$menu" = "rofi -show drun";
             "$ssLocation" = "~/screenshots/";
 
-            # Keybinds !!
+# Keybinds !!
             bind = [
-                # General Keybinds
+# General Keybinds
                 "$mainMod, Return, exec, [floating] $terminal"
-                "$mainMod, M, exit"
-                "$mainMod, SPACE, exec, $menu"
-                "$mainMod, Q, killactive"
+                    "$mainMod, M, exit"
+                    "$mainMod, SPACE, exec, $menu"
+                    "$mainMod, Q, killactive"
 
-                "$mainMod, F, togglefloating"
-                "$mainMod, S, togglesplit"
-                "$mainMod, T, togglegroup"
-                "$mainMod, B, fullscreen, 0" # its B because big hehehe
+                    "$mainMod, F, togglefloating"
+                    "$mainMod, S, togglesplit"
+                    "$mainMod, T, togglegroup"
+                    "$mainMod, B, fullscreen, 0" # its B because big hehehe
 
-                "$winShift, S, exec, hyprshot -o $ssLocation -m region"
-                "$mainMod, L, exec, hyprlock"
-                "$mainMod, C, exec, [floating] qalculate-qt"
-                "$mainMod, O, exec, [floating] nemo"
+                    "$winShift, S, exec, hyprshot -o $ssLocation -m region"
+                    "$mainMod, L, exec, hyprlock"
+                    "$mainMod, C, exec, [floating] qalculate-qt"
+                    "$mainMod, O, exec, [floating] nemo"
 
-                # Move 
-                "$mainMod, mouse_down, workspace, e+1"
-                "$mainMod, mouse_up, workspace, e-1"
+# Move 
+                    "$mainMod, mouse_down, workspace, e+1"
+                    "$mainMod, mouse_up, workspace, e-1"
 
-                # Switch between windows in a group
-                "$mainMod SHIFT, mouse_down, changegroupactive, f"
-                "$mainMod SHIFT, mouse_up, changegroupactive, b"
+# Switch between windows in a group
+                    "$mainMod SHIFT, mouse_down, changegroupactive, f"
+                    "$mainMod SHIFT, mouse_up, changegroupactive, b"
 
-                # Movement Keybinds
-                "$mainMod, h, movefocus, l"
-                "$mainMod, j, movefocus, d"
-                "$mainMod, k, movefocus, u"
-                "$mainMod, l, movefocus, r"
+# Movement Keybinds
+                    "$mainMod, h, movefocus, l"
+                    "$mainMod, j, movefocus, d"
+                    "$mainMod, k, movefocus, u"
+                    "$mainMod, l, movefocus, r"
 
-                "$mainMod SHIFT, h, movewindow, l"
-                "$mainMod SHIFT, j, movewindow, d"
-                "$mainMod SHIFT, k, movewindow, u"
-                "$mainMod SHIFT, l, movewindow, r"
+                    "$mainMod SHIFT, h, movewindow, l"
+                    "$mainMod SHIFT, j, movewindow, d"
+                    "$mainMod SHIFT, k, movewindow, u"
+                    "$mainMod SHIFT, l, movewindow, r"
 
-                # tab cycling
-                "$mainMod, Tab, cyclenext"
-                "$mainMod, Tab, bringactivetotop"
-            ] ++ mkMvWindowCmds ++ mkSwitchWkspCmds;
+# tab cycling
+                    "$mainMod, Tab, cyclenext"
+                    "$mainMod, Tab, bringactivetotop"
+                    ] ++ mkMvWindowCmds ++ mkSwitchWkspCmds;
 
             bindm = [
-                # Move and Resize Windows
+# Move and Resize Windows
                 "$mainMod, mouse:272, movewindow"
-                "$mainMod, mouse:273, resizewindow"
-                ", mouse:276, movewindow"
-                ", mouse:275, resizewindow"
+                    "$mainMod, mouse:273, resizewindow"
+                    ", mouse:276, movewindow"
+                    ", mouse:275, resizewindow"
             ];
 
             binde = [
                 ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
-                ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
-                ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-                ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
-                ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
+                    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
+                    ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+                    ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
+                    ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
             ];
 
             misc = {
@@ -252,8 +255,8 @@ in
                 groupbar = {
                     font_family = "JetBrains Mono";
                     font_size = 10;
-                    # rounding = 5;
-                    # round_only_edges = true;
+# rounding = 5;
+# round_only_edges = true;
                     "col.active" = "rgba(8ec07cff) rgba(689d6aff) 60deg";
                     "col.inactive" = "rgba(595959aa)";
                 };
@@ -273,15 +276,15 @@ in
                 resize_on_border = false;
             };
 
-            # Do we need this?
+# Do we need this?
             "windowrulev2" = [
                 "suppressevent maximize, class:.*"
-                "opacity 0.0 override, class:^(xwaylandvideobridge)$"
-                "noanim, class:^(xwaylandvideobridge)$"
-                "noinitialfocus, class:^(xwaylandvideobridge)$"
-                "maxsize 1 1, class:^(xwaylandvideobridge)$"
-                "noblur, class:^(xwaylandvideobridge)$"
-                "nofocus, class:^(xwaylandvideobridge)$"
+                    "opacity 0.0 override, class:^(xwaylandvideobridge)$"
+                    "noanim, class:^(xwaylandvideobridge)$"
+                    "noinitialfocus, class:^(xwaylandvideobridge)$"
+                    "maxsize 1 1, class:^(xwaylandvideobridge)$"
+                    "noblur, class:^(xwaylandvideobridge)$"
+                    "nofocus, class:^(xwaylandvideobridge)$"
             ];
 
             decoration = {
@@ -304,26 +307,26 @@ in
                 preserve_split = true;
             };
 
-            # Startup Programs !!
+# Startup Programs !!
             exec-once = [
                 "wpaperd"
-                "waybar"
-                "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+                    "waybar"
+                    "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
             ];
 
-            # This may have to change between machines, later problem
+# This may have to change between machines, later problem
             monitor = "eDP-1, 1920x1080@60, 0x0, 1, bitdepth, 10";
         };
     };
-    
+
     services.hypridle = {
         enable = true;
         settings = {
             listener = [
-                {
-                    timeout = 600;
-                    on-timeout = "exec hyprlock";
-                }
+            {
+                timeout = 600;
+                on-timeout = "exec hyprlock";
+            }
             ];
         };
     };
@@ -340,69 +343,69 @@ in
             };
 
             background = [
-                {
-                    path =  "${config.home.homeDirectory}/NixOS/wallpapers/jungle_mountains.jpg";
-                    blur_passes = 2;
-                    blur_size = 8;
-                }
+            {
+                path =  "${config.home.homeDirectory}/NixOS/wallpapers/jungle_mountains.jpg";
+                blur_passes = 2;
+                blur_size = 8;
+            }
             ];
 
             input-field = [
-                {
-                    monitor = "";
-                    size = "188, 45";
-                    outline_thickness = 2;
-                    dots_size = 0.2;
-                    dots_spacing = 0.35;
-                    dots_center = true;
-                    outer_color = "rgba(0, 0, 0, 0)";
-                    inner_color = "rgba(0, 0, 0, 0.2)";
-                    font_color = "rgb(235, 219, 178)";
-                    fade_on_empty = false;
-                    rounding = -1;
-                    check_color = "rgb(251, 73, 52)";
-                    placeholder_text = "<i><span foreground=\"##ebdbb2\">Input Password...</span></i>";
-                    position = "0, -200";
-                    halign = "center";
-                    valign = "center";
-                }
+            {
+                monitor = "";
+                size = "188, 45";
+                outline_thickness = 2;
+                dots_size = 0.2;
+                dots_spacing = 0.35;
+                dots_center = true;
+                outer_color = "rgba(0, 0, 0, 0)";
+                inner_color = "rgba(0, 0, 0, 0.2)";
+                font_color = "rgb(235, 219, 178)";
+                fade_on_empty = false;
+                rounding = -1;
+                check_color = "rgb(251, 73, 52)";
+                placeholder_text = "<i><span foreground=\"##ebdbb2\">Input Password...</span></i>";
+                position = "0, -200";
+                halign = "center";
+                valign = "center";
+            }
             ];
 
 # #ebdbb2
             label = [
-                # Clock
-                {
-                    monitor = "";
-                    text = "cmd[update:1000] date +\"%-I:%M%p\"";
-                    color = "rgba(235, 219, 178, 0.75)";
-                    font_size = 95;
-                    font_family = "JetBrains Mono Extrabold";
-                    position = "0, 200";
-                    halign = "center";
-                    valign = "center";
-                }
-                # Date
-                {
-                    monitor = "";
-                    text = "cmd[update:1000] date +\"%A, %B %d\"";
-                    color = "rgba(235, 219, 178, 0.75)";
-                    font_size = 22;
-                    font_family = "JetBrains Mono";
-                    position = "0, 300";
-                    halign = "center";
-                    valign = "center";
-                }
-                # Current Song
-                {
-                    monitor = "";
-                    text = "cmd[update:1000] echo \"$(~/NixOS/components/hyprland/waybar/spotify/metadata.sh query)\"";
-                    color = "rgba(235, 219, 178, 0.75)";
-                    font_size = 14;
-                    font_family = "JetBrains Mono";
-                    position = "0, 20";
-                    halign = "center";
-                    valign = "bottom";
-                }
+# Clock
+            {
+                monitor = "";
+                text = "cmd[update:1000] date +\"%-I:%M%p\"";
+                color = "rgba(235, 219, 178, 0.75)";
+                font_size = 95;
+                font_family = "JetBrains Mono Extrabold";
+                position = "0, 200";
+                halign = "center";
+                valign = "center";
+            }
+# Date
+            {
+                monitor = "";
+                text = "cmd[update:1000] date +\"%A, %B %d\"";
+                color = "rgba(235, 219, 178, 0.75)";
+                font_size = 22;
+                font_family = "JetBrains Mono";
+                position = "0, 300";
+                halign = "center";
+                valign = "center";
+            }
+# Current Song
+            {
+                monitor = "";
+                text = "cmd[update:1000] echo \"$(~/NixOS/components/hyprland/waybar/spotify/metadata.sh query)\"";
+                color = "rgba(235, 219, 178, 0.75)";
+                font_size = 14;
+                font_family = "JetBrains Mono";
+                position = "0, 20";
+                halign = "center";
+                valign = "bottom";
+            }
             ];
         };
     };

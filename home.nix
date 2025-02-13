@@ -1,7 +1,9 @@
 
-{ inputs, user, ... }:
+{ inputs, user, programs, ... }:
 
 {
+    programs.home-manager.enable = true;
+
     home = {
         username = "${user}";
         homeDirectory = "/home/${user}";
