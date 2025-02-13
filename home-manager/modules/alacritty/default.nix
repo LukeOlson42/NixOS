@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-    colorscheme = import ../colors.nix;
+    colorscheme = import ../../../colors.nix;
 in
 {
 	programs.alacritty = {

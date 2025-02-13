@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, osConfig, ... }:
 let
     mkSwitchWkspCmds =
         builtins.concatLists (builtins.genList (i:
@@ -94,7 +94,7 @@ in
             };
             "custom/logo" = {
                 format = " ";
-                on-click = "~/NixOS/components/hyprland/rofi/powermenu.sh";
+                on-click = "~/NixOS/home-manager/modules/hyprland/rofi/powermenu.sh";
             };
 #             "custom/spotify" = {
 #                 exec = "~/NixOS/components/hyprland/waybar/spotify/metadata.sh";
@@ -161,8 +161,13 @@ in
 
     services.gammastep = {
         enable = true;
-        latitude = 42.972218;
-        longitude = 85.951547;
+        dawnTime = "07:00";
+        duskTime = "17:00";
+        temperature = {
+            day = 5700;
+            night = 2700;
+        };
+        tray = true;
     };
 
     wayland.windowManager.hyprland = {
@@ -183,22 +188,30 @@ in
             # Keybinds !!
             bind = [
                 # General Keybinds
-                "$mainMod, Return, exec, $terminal"
+                "$mainMod, Return, exec, [floating] $terminal"
                 "$mainMod, M, exit"
                 "$mainMod, SPACE, exec, $menu"
                 "$mainMod, Q, killactive"
-                "$mainMod, A, togglefloating"
-                "$mainMod, F, togglesplit"
-                "$mainMod, P, pseudo"
+
+                "$mainMod, F, togglefloating"
+                "$mainMod, S, togglesplit"
+                "$mainMod, T, togglegroup"
+                "$mainMod, B, fullscreen, 0" # its B because big hehehe
+
                 "$winShift, S, exec, hyprshot -o $ssLocation -m region"
                 "$mainMod, L, exec, hyprlock"
                 "$mainMod, C, exec, [floating] qalculate-qt"
                 "$mainMod, O, exec, [floating] nemo"
 
-                # Movement Keybinds
+                # Move 
                 "$mainMod, mouse_down, workspace, e+1"
                 "$mainMod, mouse_up, workspace, e-1"
 
+                # Switch between windows in a group
+                "$mainMod SHIFT, mouse_down, changegroupactive, f"
+                "$mainMod SHIFT, mouse_up, changegroupactive, b"
+
+                # Movement Keybinds
                 "$mainMod, h, movefocus, l"
                 "$mainMod, j, movefocus, d"
                 "$mainMod, k, movefocus, u"
@@ -208,11 +221,6 @@ in
                 "$mainMod SHIFT, j, movewindow, d"
                 "$mainMod SHIFT, k, movewindow, u"
                 "$mainMod SHIFT, l, movewindow, r"
-
-                "$mainMod SUPER, h, resizeactive, -20 0"
-                "$mainMod SUPER, j, resizeactive, 0 20"
-                "$mainMod SUPER, k, resizeactive, 0 -20"
-                "$mainMod SUPER, l, resizeactive, 20 0"
 
                 # tab cycling
                 "$mainMod, Tab, cyclenext"
@@ -240,6 +248,18 @@ in
                 animate_mouse_windowdragging = true;
             };
 
+            group = {
+                groupbar = {
+                    font_family = "JetBrains Mono";
+                    font_size = 10;
+                    # rounding = 5;
+                    # round_only_edges = true;
+                    "col.active" = "rgba(8ec07cff) rgba(689d6aff) 60deg";
+                    "col.inactive" = "rgba(595959aa)";
+                };
+
+            };
+
             general = {
                 allow_tearing = false;
                 layout = "dwindle";
@@ -248,7 +268,6 @@ in
                 border_size = 2;
 
                 "col.active_border" = "rgba(8ec07cff) rgba(689d6aff) 60deg";
-                # not gruvbox gray, but pretty nice 
                 "col.inactive_border" = "rgba(595959aa)";
 
                 resize_on_border = false;

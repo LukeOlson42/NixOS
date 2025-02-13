@@ -268,28 +268,7 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-stable": "nixpkgs-stable",
-        "sddm-sugar-candy-nix": "sddm-sugar-candy-nix"
-      }
-    },
-    "sddm-sugar-candy-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1722593422,
-        "narHash": "sha256-uZTuVWQEnfmcZj9QEEFCh0lMuCJULXQSurLTC/9tRgY=",
-        "owner": "Zhaith-Izaliel",
-        "repo": "sddm-sugar-candy-nix",
-        "rev": "35d6fdb4eed20d682e992ae3c6095427e89c2b74",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Zhaith-Izaliel",
-        "repo": "sddm-sugar-candy-nix",
-        "type": "github"
+        "nixpkgs-stable": "nixpkgs-stable"
       }
     },
     "systems": {

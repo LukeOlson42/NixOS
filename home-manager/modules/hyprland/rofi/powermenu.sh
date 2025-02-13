@@ -11,7 +11,7 @@
 ## style-6   style-7   style-8   style-9   style-10
 
 # Current Theme
-dir="$HOME/NixOS/components/hyprland/rofi"
+dir="$HOME/NixOS/home-manager/modules/hyprland/rofi"
 theme='powermenu'
 
 # CMDs

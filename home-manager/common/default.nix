@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-
+{ config, pkgs, ... }:
 {
 	home = {
 		packages = with pkgs; [
@@ -35,24 +34,5 @@
 
     programs.ssh = {
         enable = true;
-    };
-
-    programs.tmux = {
-        enable = true;
-        shell = "~/.nix-profile/bin/zsh";
-        mouse = true;
-        extraConfig = ''
-            unbind C-b
-            set-option -g prefix C-a
-            bind-key C-a send-prefix
-
-            bind -n C-b split-window -h
-            bind -n C-v split-window -v
-
-            bind -n C-h select-pane -L
-            bind -n C-j select-pane -D
-            bind -n C-k select-pane -U
-            bind -n C-l select-pane -R
-        '';
     };
 }
