@@ -38,6 +38,7 @@ let
                         };
                         home-manager.useUserPackages = true;
                         home-manager.useGlobalPkgs = true;
+                        home-manager.backupFileExtension = "hm-backup";
                         home-manager.users.${user}.imports = [
                             ./home.nix
                             ./home-manager/common

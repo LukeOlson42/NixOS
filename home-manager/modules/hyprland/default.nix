@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, osConfig, ... }:
+{ inputs, config, pkgs, osConfig, hyprland, ... }:
 let
     mkSwitchWkspCmds =
         builtins.concatLists (builtins.genList (i:
@@ -20,10 +20,10 @@ in
     home = {
         packages = with pkgs; [
             libnotify
-                rofi-wayland
-                brightnessctl
-                hyprshot
-                pavucontrol
+            rofi-wayland
+            brightnessctl
+            hyprshot
+            pavucontrol
         ];
     };
 
@@ -174,7 +174,6 @@ in
         enable = true;
         xwayland.enable = true;
         package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         systemd.enable = true;
         settings = {
 # Hyprland Variables !!

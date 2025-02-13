@@ -8,7 +8,10 @@
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+        hyprland = {
+            url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         sddm-sugar-candy-nix = {
             url = "github:Zhaith-Izaliel/sddm-sugar-candy-nix";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +46,7 @@
                     /sioyek
                     /yazi
                     /zsh
+                    /firefox
                 ];
             };
         };
