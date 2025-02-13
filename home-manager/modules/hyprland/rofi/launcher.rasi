@@ -20,7 +20,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "./NixOS/home-manager/modules/hyprland/rofi/gruvbox.rasi"
+@import                          "~/NixOS/home-manager/modules/hyprland/rofi/gruvbox.rasi"
 
 * {
     border-colour:               var(selected);
