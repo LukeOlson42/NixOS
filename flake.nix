@@ -16,6 +16,8 @@
             url = "github:Zhaith-Izaliel/sddm-sugar-candy-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        textfox.url = "github:adriankarlen/textfox";
 	};
 
 	outputs = { ... }@inputs:

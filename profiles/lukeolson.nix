@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
     home = {
@@ -17,6 +17,7 @@
         ../components/neovim/neovim.nix 
         ../components/sioyek/sioyek.nix 
         ../components/zsh/zsh.nix 
+        ../components/firefox/firefox.nix 
     ];
 
     # Let Home Manager install and manage itself.

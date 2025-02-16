@@ -11,6 +11,7 @@
 
         # Kinda hacky but it works
 		inputs.home-manager.nixosModules.home-manager
+		# inputs.textfox.nixosModules.home-manager
 
         ../../components/gaming/gaming.nix
         ../../components/minecraft/minecraft.nix
@@ -104,7 +105,6 @@
 
 	# Split in multiple files, for different package lists
 	environment.systemPackages = with pkgs; [
-		firefox
 		home-manager
         linux-manual
         man-pages
