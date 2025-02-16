@@ -2,16 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, username, ... }:
 
 {
 	imports = [ 
         # Include the results of the hardware scan.
 		./desktop-hardware.nix
-
-        # Kinda hacky but it works
-		inputs.home-manager.nixosModules.home-manager
-		# inputs.textfox.nixosModules.home-manager
 
         ../../components/gaming/gaming.nix
         ../../components/minecraft/minecraft.nix
@@ -74,6 +70,16 @@
 		variant = "";
 	};
 
+    home-manager = {
+        extraSpecialArgs = { inherit inputs username; };
+        users = {
+            "${username}" = import ../../profiles/${username}.nix;
+        };
+    };
+
+    programs.hyprland.enable = true;
+    programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users = {
         groups = {
@@ -105,7 +111,6 @@
 
 	# Split in multiple files, for different package lists
 	environment.systemPackages = with pkgs; [
-		home-manager
         linux-manual
         man-pages
         man-pages-posix
@@ -133,9 +138,6 @@
         };
     };
 
-    programs.hyprland.enable = true;
-    programs.hyprland.xwayland.enable = true;
-
     xdg = {
         portal = {
             enable = true;
@@ -146,7 +148,6 @@
             };
             extraPortals = [
                 pkgs.xdg-desktop-portal-gtk
-                pkgs.xdg-desktop-portal-hyprland
             ];
         };
     };
@@ -163,14 +164,6 @@
         enable = true;
         enable32Bit = true;
     };
-
-	# Home Manager
-	home-manager = {
-        extraSpecialArgs = { inherit inputs; };
-        users = {
-            lukeolson = import ./../../profiles/lukeolson.nix;
-        };
-	};
 
 	fonts = {
 		enableDefaultPackages = true;

@@ -1,11 +1,11 @@
-{ pkgs, inputs, ... }:
+{ pkgs, username, ... }:
 let
     colorscheme = import ../colors.nix;
 in
 {
     programs.firefox = {
         enable = true;
-        profiles."lukeolson" = {
+        profiles."${username}" = {
             search = {
                 force = true;
                 engines = {
@@ -67,9 +67,9 @@ in
         };
     };
 
-    inputs.textfox = {
+    textfox = {
         enable = true;
-        profile = "lukeolson";
+        profile = "${username}";
         config = {
             background = {
                 color = colorscheme.simple_green.primary.background;

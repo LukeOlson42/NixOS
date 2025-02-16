@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
     mkSwitchWkspCmds =
         builtins.concatLists (builtins.genList (i:
@@ -168,6 +168,10 @@ in
     wayland.windowManager.hyprland = {
         enable = true;
         systemd.enable = true;
+        xwayland.enable = true;
+
+        package = inputs.hyprland.packages."x86_64-linux".hyprland;
+
         settings = {
             # Hyprland Variables !!
             "$mainMod" = "ALT";
@@ -183,7 +187,7 @@ in
             # Keybinds !!
             bind = [
                 # General Keybinds
-                "$mainMod, Return, exec, $terminal"
+                "$mainMod, Return, exec, [floating] $terminal"
                 "$mainMod, M, exit"
                 "$mainMod, SPACE, exec, $menu"
                 "$mainMod, Q, killactive"

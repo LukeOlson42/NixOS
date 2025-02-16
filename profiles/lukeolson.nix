@@ -1,6 +1,8 @@
 { inputs, config, pkgs, ... }:
 
 {
+    programs.home-manager.enable = true;
+
     home = {
         username = "lukeolson";
         homeDirectory = "/home/lukeolson";
@@ -11,6 +13,8 @@
     nixpkgs.config.allowUnfree = true;
 
     imports = [
+        inputs.textfox.homeManagerModules.default
+
         ../components/common/common.nix 
         ../components/alacritty/alacritty.nix 
         ../components/hyprland/hyprland.nix 
@@ -19,7 +23,4 @@
         ../components/zsh/zsh.nix 
         ../components/firefox/firefox.nix 
     ];
-
-    # Let Home Manager install and manage itself.
-    programs.home-manager.enable = true;
 }
