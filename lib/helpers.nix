@@ -24,11 +24,9 @@ in rec {
             pkgs = pkgsFor sys;
             extraSpecialArgs = {
                 inherit inputs my_lib outputs;
-                inherit (inputs) textfox;
             };
             modules = [
                 config
-                inputs.textfox.homeManagerModules.default
             ];
         };
 

@@ -67,7 +67,7 @@ in
         };
     };
 
-    inputs.textfox = {
+    textfox = {
         enable = true;
         profile = "lukeolson";
         config = {
