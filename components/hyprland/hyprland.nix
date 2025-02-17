@@ -110,14 +110,14 @@ in
             };
             clock = {
                 interval = 1;
-                format = "{%D :%H:%M:%S}";
+                format = "{:%m/%d/%y - %H:%M:%S}";
                 format-alt = "{:%A, %B %d, %Y (%R)}";
             };
             cpu = {
                 format = "CPU: {usage}%";
             };
             memory = {
-                format = "RAM: {used}/{avail}GB";
+                format = "RAM: {used}/{total}GB";
             };
             # backlight = {
             #     # device = "intel_backlight";
