@@ -6,13 +6,12 @@
 		nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
   		home-manager = {
-  			url = "github:nix-community/home-manager/release-24.11";
+  			url = "github:nix-community/home-manager";
   			inputs.nixpkgs.follows = "nixpkgs";
   		};
 
         hyprland = {
-            url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-            inputs.nixpkgs.follows = "nixpkgs";
+            url = "github:hyprwm/Hyprland";
         };
 
         sddm-sugar-candy-nix = {
@@ -46,7 +45,6 @@
                 modules = [
                     ./machines/desktop
                     home-manager.nixosModules.home-manager {
-                        home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
                         home-manager.extraSpecialArgs = specialArgs;
                         home-manager.users."${username}" = import ./profiles/${username}.nix;

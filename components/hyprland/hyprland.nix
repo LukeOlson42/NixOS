@@ -29,7 +29,7 @@ in
 
     services.mako = {
         enable = true;
-        font = "JetBrains Mono 8";
+        font = "JetBrains Mono NerdFont 8";
         defaultTimeout = 10000;
         backgroundColor = "#282828";
         borderColor = "#8ec07c";
@@ -48,7 +48,7 @@ in
     programs.rofi = {
         enable = true;
         terminal = "alacritty";
-        font = "JetBrains Mono 12";
+        font = "JetBrains Mono Nerd Font 12";
         theme = ./rofi/launcher.rasi;
         package = pkgs.rofi-wayland;
     };
@@ -350,7 +350,7 @@ in
                     text = "cmd[update:1000] date +\"%-I:%M%p\"";
                     color = "rgba(235, 219, 178, 0.75)";
                     font_size = 95;
-                    font_family = "JetBrains Mono Extrabold";
+                    font_family = "JetBrains Mono Nerd Font Extrabold";
                     position = "0, 200";
                     halign = "center";
                     valign = "center";
@@ -361,7 +361,7 @@ in
                     text = "cmd[update:1000] date +\"%A, %B %d\"";
                     color = "rgba(235, 219, 178, 0.75)";
                     font_size = 22;
-                    font_family = "JetBrains Mono";
+                    font_family = "JetBrains Mono Nerd Font";
                     position = "0, 300";
                     halign = "center";
                     valign = "center";

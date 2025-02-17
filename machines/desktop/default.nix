@@ -98,7 +98,11 @@
 	};
 
 	# Lets use some flakes baybee
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+	nix.settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+        substituters = [ "https://hyprland.cachix.org" ];
+        trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    };
 
 	# Only keep a week's worth of generations
 	nix.settings.auto-optimise-store = true;
@@ -169,14 +173,12 @@
 	fonts = {
 		enableDefaultPackages = true;
 		packages = with pkgs; [
-			iosevka
-			(nerdfonts.override { fonts = [ "Iosevka" ]; })	
-            jetbrains-mono
+            nerd-fonts.jetbrains-mono
 		];
 
 		fontconfig = {
 			defaultFonts = {
-				monospace = [ "JetBrains Mono" ];
+				monospace = [ "JetBrains Mono Nerd Font" ];
 			};
 		};
 	};
@@ -187,9 +189,9 @@
             VISUAL = "nvim";
             TERM = "alacritty";
             SHELL = "zsh";
-          XDG_CURRENT_DESKTOP = "Hyprland";
-          XDG_SESSION_TYPE = "wayland";
-          XDG_SESSION_DESKTOP = "Hyprland";
+            XDG_CURRENT_DESKTOP = "Hyprland";
+            XDG_SESSION_TYPE = "wayland";
+            XDG_SESSION_DESKTOP = "Hyprland";
         };
         # these may work?
         sessionVariables = {
