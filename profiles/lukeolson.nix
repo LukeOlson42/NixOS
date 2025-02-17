@@ -1,9 +1,9 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, username, ... }:
 
 {
     home = {
-        username = "lukeolson";
-        homeDirectory = "/home/lukeolson";
+        inherit username;
+        homeDirectory = "/home/${username}";
         # Don't change, check release notes if need to
         stateVersion = "24.11"; # Please read the comment before changing.
     };
@@ -21,6 +21,5 @@
         ../components/firefox/firefox.nix 
     ];
 
-    # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 }

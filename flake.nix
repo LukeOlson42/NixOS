@@ -10,31 +10,47 @@
   			inputs.nixpkgs.follows = "nixpkgs";
   		};
 
-        hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+        hyprland = {
+            url = "github:hyprwm/Hyprland";
+        };
 
         sddm-sugar-candy-nix = {
             url = "github:Zhaith-Izaliel/sddm-sugar-candy-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        textfox.url = "github:adriankarlen/textfox";
+        textfox = {
+            url = "github:adriankarlen/textfox";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 	};
 
-	outputs = { ... }@inputs:
+	outputs = {
+        self,
+        nixpkgs,
+        home-manager,
+        ...
+    }@inputs:
 	let
-        # Thanks vimjoyer for the resources !
-        my_lib = import ./lib/helpers.nix { inherit inputs; };
+        # system type
+        system = "x86_64-linux";
+        # main username
+        username = "lukeolson";
+        specialArgs = { inherit username inputs; };
 	in
-    with my_lib;
 	{
-		nixosConfigurations = {
-            asusLaptop = mkSystem ./machines/asus_laptop/asus_laptop.nix;
-            mainDesktop = mkSystem ./machines/desktop/desktop.nix;
-		};
-
-        homeConfigurations = {
-            "lukeolson@nixon" = mkHome "x86_64-linux" ./profiles/lukeolson.nix;
-            "lukeolson@nixos-desktop" = mkHome "x86_64-linux" ./profiles/lukeolson.nix;
+        nixosConfigurations = {
+            main-desktop = nixpkgs.lib.nixosSystem {
+                inherit specialArgs system;
+                modules = [
+                    ./machines/desktop
+                    home-manager.nixosModules.home-manager {
+                        home-manager.useUserPackages = true;
+                        home-manager.extraSpecialArgs = specialArgs;
+                        home-manager.users."${username}" = import ./profiles/${username}.nix;
+                    }
+                ];
+            };
         };
 	};
 }

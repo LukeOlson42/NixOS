@@ -2,15 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, username, ... }:
 
 {
 	imports = [ 
         # Include the results of the hardware scan.
 		./desktop-hardware.nix
 
-        # Kinda hacky but it works
-		inputs.home-manager.nixosModules.home-manager
         inputs.sddm-sugar-candy-nix.nixosModules.default
 
         ../../components/gaming/gaming.nix
@@ -74,11 +72,19 @@
 		variant = "";
 	};
 
+    programs.hyprland = {
+        enable = true;
+        xwayland.enable = true;
+        systemd.setPath.enable = true;
+        package = inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".hyprland;
+        portalPackage = inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".xdg-desktop-portal-hyprland;
+    };
+
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users = {
         groups = {
             docker = {
-                members = [ "lukeolson" ];
+                members = [ "${username}" ];
             };
         };
         users.lukeolson = {
@@ -92,7 +98,11 @@
 	};
 
 	# Lets use some flakes baybee
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+	nix.settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+        substituters = [ "https://hyprland.cachix.org" ];
+        trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    };
 
 	# Only keep a week's worth of generations
 	nix.settings.auto-optimise-store = true;
@@ -105,7 +115,6 @@
 
 	# Split in multiple files, for different package lists
 	environment.systemPackages = with pkgs; [
-		home-manager
         linux-manual
         man-pages
         man-pages-posix
@@ -133,9 +142,6 @@
         };
     };
 
-    programs.hyprland.enable = true;
-    programs.hyprland.xwayland.enable = true;
-
     xdg = {
         portal = {
             enable = true;
@@ -146,7 +152,6 @@
             };
             extraPortals = [
                 pkgs.xdg-desktop-portal-gtk
-                pkgs.xdg-desktop-portal-hyprland
             ];
         };
     };
@@ -155,6 +160,7 @@
         enable = true;
         powerOnBoot = true;
     };
+
     services.blueman = {
         enable = true;
     };
@@ -164,26 +170,15 @@
         enable32Bit = true;
     };
 
-	# Home Manager
-	home-manager = {
-        extraSpecialArgs = { inherit inputs; };
-        users = {
-            lukeolson = import ./../../profiles/lukeolson.nix;
-        };
-	};
-
 	fonts = {
 		enableDefaultPackages = true;
 		packages = with pkgs; [
-			iosevka
-			(nerdfonts.override { fonts = [ "Iosevka" ]; })	
-            jetbrains-mono
+            nerd-fonts.jetbrains-mono
 		];
 
 		fontconfig = {
 			defaultFonts = {
-				# monospace = [ "Iosevka Mono" ];
-				monospace = [ "JetBrains Mono" ];
+				monospace = [ "JetBrains Mono Nerd Font" ];
 			};
 		};
 	};
@@ -194,9 +189,9 @@
             VISUAL = "nvim";
             TERM = "alacritty";
             SHELL = "zsh";
-          XDG_CURRENT_DESKTOP = "Hyprland";
-          XDG_SESSION_TYPE = "wayland";
-          XDG_SESSION_DESKTOP = "Hyprland";
+            XDG_CURRENT_DESKTOP = "Hyprland";
+            XDG_SESSION_TYPE = "wayland";
+            XDG_SESSION_DESKTOP = "Hyprland";
         };
         # these may work?
         sessionVariables = {

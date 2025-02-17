@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
     mkSwitchWkspCmds =
         builtins.concatLists (builtins.genList (i:
@@ -29,7 +29,7 @@ in
 
     services.mako = {
         enable = true;
-        font = "JetBrains Mono 8";
+        font = "JetBrains Mono NerdFont 8";
         defaultTimeout = 10000;
         backgroundColor = "#282828";
         borderColor = "#8ec07c";
@@ -48,7 +48,7 @@ in
     programs.rofi = {
         enable = true;
         terminal = "alacritty";
-        font = "JetBrains Mono 12";
+        font = "JetBrains Mono Nerd Font 12";
         theme = ./rofi/launcher.rasi;
         package = pkgs.rofi-wayland;
     };
@@ -96,18 +96,6 @@ in
                 format = " ";
                 on-click = "~/NixOS/components/hyprland/rofi/powermenu.sh";
             };
-#             "custom/spotify" = {
-#                 exec = "~/NixOS/components/hyprland/waybar/spotify/metadata.sh";
-#                 max-length = 40;
-#                 return-type = "json";
-#                 format = "{} ";
-#                 on-click = "~/NixOS/components/hyprland/waybar/spotify/controls.sh";
-#                 on-scroll-up = "~/NixOS/components/hyprland/waybar/spotify/controls.sh next ";
-#                 on-scroll-down = "~/NixOS/components/hyprland/waybar/spotify/controls.sh previous";
-#                 signal = 5;
-#                 smooth-scrolling-threshold = 1.0;
-#                 interval = 60;
-#             };
             idle_inhibitor = {
                 format = "{icon}";
                 format-icons = {
@@ -122,28 +110,28 @@ in
             };
             clock = {
                 interval = 1;
-                format = "{:%H:%M:%S}";
+                format = "{:%m/%d/%y - %H:%M:%S}";
                 format-alt = "{:%A, %B %d, %Y (%R)}";
             };
             cpu = {
                 format = "CPU: {usage}%";
             };
             memory = {
-                format = "RAM: {}%";
+                format = "RAM: {used}/{total}GB";
             };
-            backlight = {
-                # device = "intel_backlight";
-                format = "　{percent}%";
-                format-icons = ["" ""];
-            };
-            battery = {
-                format = "　{capacity}%";
-            };
+            # backlight = {
+            #     # device = "intel_backlight";
+            #     format = "　{percent}%";
+            #     format-icons = ["" ""];
+            # };
+            # battery = {
+            #     format = "　{capacity}%";
+            # };
             network = {
                 format-wifi = "WiFi: {signalStrength}%";
-                format-ethernet = "{bandwidthDownBits}   {bandwidthUpBits}  ";
-                format-disconnected = "Down";
-                interval = 1;
+                format-ethernet = "{ifname}";
+                format-disconnected = "";
+                tooltip-format = "{ifname} via {gwaddr}";
             };
             pulseaudio = {
                 # scroll-step = 1,
@@ -172,7 +160,7 @@ in
 
     wayland.windowManager.hyprland = {
         enable = true;
-        systemd.enable = true;
+
         settings = {
             # Hyprland Variables !!
             "$mainMod" = "ALT";
@@ -365,7 +353,7 @@ in
                     text = "cmd[update:1000] date +\"%-I:%M%p\"";
                     color = "rgba(235, 219, 178, 0.75)";
                     font_size = 95;
-                    font_family = "JetBrains Mono Extrabold";
+                    font_family = "JetBrains Mono Nerd Font Extrabold";
                     position = "0, 200";
                     halign = "center";
                     valign = "center";
@@ -376,21 +364,10 @@ in
                     text = "cmd[update:1000] date +\"%A, %B %d\"";
                     color = "rgba(235, 219, 178, 0.75)";
                     font_size = 22;
-                    font_family = "JetBrains Mono";
+                    font_family = "JetBrains Mono Nerd Font";
                     position = "0, 300";
                     halign = "center";
                     valign = "center";
-                }
-                # Current Song
-                {
-                    monitor = "";
-                    text = "cmd[update:1000] echo \"$(~/NixOS/components/hyprland/waybar/spotify/metadata.sh query)\"";
-                    color = "rgba(235, 219, 178, 0.75)";
-                    font_size = 14;
-                    font_family = "JetBrains Mono";
-                    position = "0, 20";
-                    halign = "center";
-                    valign = "bottom";
                 }
             ];
         };

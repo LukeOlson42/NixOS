@@ -1,11 +1,15 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, username, ... }:
 let
     colorscheme = import ../colors.nix;
 in
 {
+    imports = [
+        inputs.textfox.homeManagerModules.default
+    ];
+
     programs.firefox = {
         enable = true;
-        profiles."lukeolson" = {
+        profiles."${username}" = {
             search = {
                 force = true;
                 engines = {
@@ -69,7 +73,7 @@ in
 
     textfox = {
         enable = true;
-        profile = "lukeolson";
+        profile = "${username}";
         config = {
             background = {
                 color = colorscheme.simple_green.primary.background;

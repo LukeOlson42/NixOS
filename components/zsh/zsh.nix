@@ -5,6 +5,8 @@ let
         autoload -U colors && colors
         PROMPT='%B%{$fg[white]%}[%{$fg[green]%}%n%{$fg[white]%}@%{$fg[green]%}%M %{$fg[white]%}%~%{$fg[white]%}]%{$fg[white]%} $%b '
     '';
+
+    hmDir = config.home.homeDirectory;
 in
 {
     home.file.".oh-my-zsh/custom/themes/lukeolson.zsh-theme".text = zshTheme;
@@ -15,6 +17,7 @@ in
 		shellAliases = {
 			ls = "eza -l -s extension";
 			cls = "clear";
+            mkos = "sudo nixos-rebuild switch --flake ${hmDir}/NixOS/#main-desktop --show-trace --impure";
 		};
 
         dotDir = ".config/zsh";
@@ -27,7 +30,7 @@ in
         oh-my-zsh = {
             enable = true;
             theme = "lukeolson";
-            custom = "${config.home.homeDirectory}/.oh-my-zsh/custom";
+            custom = "${hmDir}/.oh-my-zsh/custom";
         };
 	};
 

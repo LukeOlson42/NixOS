@@ -9,9 +9,9 @@ in
 		settings = {
 			font = {
 				size = 10;
-				normal.family = "JetBrains Mono";
-				bold.family = "JetBrains Mono";
-				italic.family = "JetBrains Mono";
+				normal.family = "JetBrains Mono Nerd Font";
+				bold.family = "JetBrains Mono Nerd Font";
+				italic.family = "JetBrains Mono Nerd Font";
 			};
 
             colors = colorscheme.simple_green;
@@ -22,7 +22,7 @@ in
 
             cursor.style = "Block";
 
-			shell.program = "zsh";
+			terminal.shell.program = "zsh";
             window.opacity = 0.9;
 		};
 	};
