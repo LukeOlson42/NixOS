@@ -9,6 +9,8 @@
         # Include the results of the hardware scan.
 		./desktop-hardware.nix
 
+        inputs.sddm-sugar-candy-nix.nixosModules.default
+
         ../../components/gaming/gaming.nix
         ../../components/minecraft/minecraft.nix
         ../../components/docker/docker.nix
@@ -70,15 +72,13 @@
 		variant = "";
 	};
 
-    home-manager = {
-        extraSpecialArgs = { inherit inputs username; };
-        users = {
-            "${username}" = import ../../profiles/${username}.nix;
-        };
+    programs.hyprland = {
+        enable = true;
+        xwayland.enable = true;
+        systemd.setPath.enable = true;
+        package = inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".hyprland;
+        portalPackage = inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".xdg-desktop-portal-hyprland;
     };
-
-    programs.hyprland.enable = true;
-    programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users = {

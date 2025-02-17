@@ -1,8 +1,6 @@
 { inputs, config, pkgs, username, ... }:
 
 {
-    programs.home-manager.enable = true;
-
     home = {
         inherit username;
         homeDirectory = "/home/${username}";
@@ -21,4 +19,6 @@
         ../components/zsh/zsh.nix 
         ../components/firefox/firefox.nix 
     ];
+
+    programs.home-manager.enable = true;
 }

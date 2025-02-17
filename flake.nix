@@ -6,7 +6,7 @@
 		nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
   		home-manager = {
-  			url = "github:nix-community/home-manager";
+  			url = "github:nix-community/home-manager/release-24.11";
   			inputs.nixpkgs.follows = "nixpkgs";
   		};
 
@@ -29,14 +29,12 @@
 	outputs = {
         self,
         nixpkgs,
-        sddm-sugar-candy-nix,
         home-manager,
-        hyprland,
         ...
     }@inputs:
 	let
         # system type
-        sys = "x86_64-linux";
+        system = "x86_64-linux";
         # main username
         username = "lukeolson";
         specialArgs = { inherit username inputs; };
@@ -44,11 +42,9 @@
 	{
         nixosConfigurations = {
             main-desktop = nixpkgs.lib.nixosSystem {
-                inherit specialArgs;
-                system = sys;
+                inherit specialArgs system;
                 modules = [
                     ./machines/desktop
-                    sddm-sugar-candy-nix.nixosModules.default
                     home-manager.nixosModules.home-manager {
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
