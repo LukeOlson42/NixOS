@@ -15,7 +15,6 @@ in rec {
 
             modules = [
                 config
-                inputs.sddm-sugar-candy-nix.nixosModules.default
             ];
         };
 

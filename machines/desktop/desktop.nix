@@ -11,7 +11,7 @@
 
         # Kinda hacky but it works
 		inputs.home-manager.nixosModules.home-manager
-		# inputs.textfox.nixosModules.home-manager
+        inputs.sddm-sugar-candy-nix.nixosModules.default
 
         ../../components/gaming/gaming.nix
         ../../components/minecraft/minecraft.nix

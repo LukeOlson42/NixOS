@@ -161,8 +161,13 @@ in
 
     services.gammastep = {
         enable = true;
-        latitude = 42.972218;
-        longitude = 85.951547;
+        dawnTime = "07:00";
+        duskTime = "17:00";
+        temperature = {
+            day = 5700;
+            night = 3000;
+        };
+        tray = true;
     };
 
     wayland.windowManager.hyprland = {
@@ -183,13 +188,16 @@ in
             # Keybinds !!
             bind = [
                 # General Keybinds
-                "$mainMod, Return, exec, $terminal"
+                "$mainMod, Return, exec, [floating] $terminal"
                 "$mainMod, M, exit"
                 "$mainMod, SPACE, exec, $menu"
                 "$mainMod, Q, killactive"
+
                 "$mainMod, A, togglefloating"
-                "$mainMod, F, togglesplit"
-                "$mainMod, P, pseudo"
+                "$mainMod, S, togglesplit"
+                "$mainMod, T, togglegroup"
+                "$mainMod, B, fullscreen, 0"
+
                 "$winShift, S, exec, hyprshot -o $ssLocation -m region"
                 "$mainMod, L, exec, hyprlock"
                 "$mainMod, C, exec, [floating] qalculate-qt"
