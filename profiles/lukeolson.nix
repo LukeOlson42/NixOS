@@ -11,7 +11,6 @@
     nixpkgs.config.allowUnfree = true;
 
     imports = [
-        inputs.textfox.homeManagerModules.default
         ../components/common/common.nix 
         ../components/alacritty/alacritty.nix 
         ../components/hyprland/hyprland.nix 
