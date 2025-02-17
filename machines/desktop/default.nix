@@ -84,7 +84,7 @@
 	users = {
         groups = {
             docker = {
-                members = [ "lukeolson" ];
+                members = [ "${username}" ];
             };
         };
         users.lukeolson = {
@@ -156,6 +156,7 @@
         enable = true;
         powerOnBoot = true;
     };
+
     services.blueman = {
         enable = true;
     };
@@ -175,7 +176,6 @@
 
 		fontconfig = {
 			defaultFonts = {
-				# monospace = [ "Iosevka Mono" ];
 				monospace = [ "JetBrains Mono" ];
 			};
 		};

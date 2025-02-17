@@ -1,11 +1,11 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, username, ... }:
 
 {
     programs.home-manager.enable = true;
 
     home = {
-        username = "lukeolson";
-        homeDirectory = "/home/lukeolson";
+        inherit username;
+        homeDirectory = "/home/${username}";
         # Don't change, check release notes if need to
         stateVersion = "24.11"; # Please read the comment before changing.
     };
@@ -13,8 +13,6 @@
     nixpkgs.config.allowUnfree = true;
 
     imports = [
-        inputs.textfox.homeManagerModules.default
-
         ../components/common/common.nix 
         ../components/alacritty/alacritty.nix 
         ../components/hyprland/hyprland.nix 

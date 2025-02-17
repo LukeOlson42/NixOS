@@ -1,8 +1,12 @@
-{ pkgs, username, ... }:
+{ pkgs, inputs, username, ... }:
 let
     colorscheme = import ../colors.nix;
 in
 {
+    imports = [
+        inputs.textfox.homeManagerModules.default
+    ];
+
     programs.firefox = {
         enable = true;
         profiles."${username}" = {

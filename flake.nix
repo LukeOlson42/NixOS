@@ -49,7 +49,12 @@
                 modules = [
                     ./machines/desktop
                     sddm-sugar-candy-nix.nixosModules.default
-                    home-manager.nixosModules.default
+                    home-manager.nixosModules.home-manager {
+                        home-manager.useGlobalPkgs = true;
+                        home-manager.useUserPackages = true;
+                        home-manager.extraSpecialArgs = specialArgs;
+                        home-manager.users."${username}" = import ./profiles/${username}.nix;
+                    }
                 ];
             };
         };
