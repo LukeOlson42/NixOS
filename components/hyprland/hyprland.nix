@@ -176,7 +176,7 @@ in
             # Keybinds !!
             bind = [
                 # General Keybinds
-                "$mainMod, Return, exec, [floating] $terminal"
+                "$mainMod, Return, exec, [float] $terminal"
                 "$mainMod, M, exit"
                 "$mainMod, SPACE, exec, $menu"
                 "$mainMod, Q, killactive"
@@ -188,8 +188,8 @@ in
 
                 "$winShift, S, exec, hyprshot -o $ssLocation -m region"
                 "$mainMod, L, exec, hyprlock"
-                "$mainMod, C, exec, [floating] qalculate-qt"
-                "$mainMod, O, exec, [floating] nemo"
+                "$mainMod, C, exec, [float] qalculate-qt"
+                "$mainMod, O, exec, [float] nemo"
 
                 # Movement Keybinds
                 "$mainMod, mouse_down, workspace, e+1"
@@ -259,6 +259,8 @@ in
                 "maxsize 1 1, class:^(xwaylandvideobridge)$"
                 "noblur, class:^(xwaylandvideobridge)$"
                 "nofocus, class:^(xwaylandvideobridge)$"
+                "float, title:^(Picture-in-Picture)$"
+                "pin, title:^(Picture-in-Picture)$"
             ];
 
             decoration = {
