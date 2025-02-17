@@ -15,6 +15,7 @@ in
 		shellAliases = {
 			ls = "eza -l -s extension";
 			cls = "clear";
+            mkos = "";
 		};
 
         dotDir = ".config/zsh";

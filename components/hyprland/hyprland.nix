@@ -96,18 +96,6 @@ in
                 format = " ";
                 on-click = "~/NixOS/components/hyprland/rofi/powermenu.sh";
             };
-#             "custom/spotify" = {
-#                 exec = "~/NixOS/components/hyprland/waybar/spotify/metadata.sh";
-#                 max-length = 40;
-#                 return-type = "json";
-#                 format = "{} ";
-#                 on-click = "~/NixOS/components/hyprland/waybar/spotify/controls.sh";
-#                 on-scroll-up = "~/NixOS/components/hyprland/waybar/spotify/controls.sh next ";
-#                 on-scroll-down = "~/NixOS/components/hyprland/waybar/spotify/controls.sh previous";
-#                 signal = 5;
-#                 smooth-scrolling-threshold = 1.0;
-#                 interval = 60;
-#             };
             idle_inhibitor = {
                 format = "{icon}";
                 format-icons = {
@@ -122,28 +110,28 @@ in
             };
             clock = {
                 interval = 1;
-                format = "{:%H:%M:%S}";
+                format = "{%D :%H:%M:%S}";
                 format-alt = "{:%A, %B %d, %Y (%R)}";
             };
             cpu = {
                 format = "CPU: {usage}%";
             };
             memory = {
-                format = "RAM: {}%";
+                format = "RAM: {used}/{avail}GB";
             };
-            backlight = {
-                # device = "intel_backlight";
-                format = "　{percent}%";
-                format-icons = ["" ""];
-            };
-            battery = {
-                format = "　{capacity}%";
-            };
+            # backlight = {
+            #     # device = "intel_backlight";
+            #     format = "　{percent}%";
+            #     format-icons = ["" ""];
+            # };
+            # battery = {
+            #     format = "　{capacity}%";
+            # };
             network = {
                 format-wifi = "WiFi: {signalStrength}%";
-                format-ethernet = "{bandwidthDownBits}   {bandwidthUpBits}  ";
-                format-disconnected = "Down";
-                interval = 1;
+                format-ethernet = "{ifname}";
+                format-disconnected = "";
+                tooltip-format = "{ifname} via {gwaddr}";
             };
             pulseaudio = {
                 # scroll-step = 1,
@@ -161,8 +149,13 @@ in
 
     services.gammastep = {
         enable = true;
-        latitude = 42.972218;
-        longitude = 85.951547;
+        dawnTime = "07:00";
+        duskTime = "17:00";
+        temperature = {
+            day = 5700;
+            night = 3000;
+        };
+        tray = true;
     };
 
     wayland.windowManager.hyprland = {
@@ -372,17 +365,6 @@ in
                     position = "0, 300";
                     halign = "center";
                     valign = "center";
-                }
-                # Current Song
-                {
-                    monitor = "";
-                    text = "cmd[update:1000] echo \"$(~/NixOS/components/hyprland/waybar/spotify/metadata.sh query)\"";
-                    color = "rgba(235, 219, 178, 0.75)";
-                    font_size = 14;
-                    font_family = "JetBrains Mono";
-                    position = "0, 20";
-                    halign = "center";
-                    valign = "bottom";
                 }
             ];
         };
