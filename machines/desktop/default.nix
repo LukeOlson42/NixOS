@@ -11,10 +11,11 @@
 
         inputs.sddm-sugar-candy-nix.nixosModules.default
 
-        ../../components/gaming/gaming.nix
-        ../../components/minecraft/minecraft.nix
-        ../../components/docker/docker.nix
-        ../../components/nemo/nemo.nix
+        ../../components/gaming
+        ../../components/minecraft
+        ../../components/docker
+        ../../components/nemo
+        ../../components/reaper
 	];
 
 	# Bootloader

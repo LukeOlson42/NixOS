@@ -11,13 +11,13 @@
     nixpkgs.config.allowUnfree = true;
 
     imports = [
-        ../components/common/common.nix 
-        ../components/alacritty/alacritty.nix 
-        ../components/hyprland/hyprland.nix 
-        ../components/neovim/neovim.nix 
-        ../components/sioyek/sioyek.nix 
-        ../components/zsh/zsh.nix 
-        ../components/firefox/firefox.nix 
+        ../components/common
+        ../components/alacritty
+        ../components/hyprland
+        ../components/neovim
+        ../components/sioyek
+        ../components/zsh
+        ../components/firefox
     ];
 
     programs.home-manager.enable = true;
