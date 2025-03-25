@@ -15,7 +15,7 @@
         ../../components/minecraft
         ../../components/docker
         ../../components/nemo
-        ../../components/reaper
+        ../../components/daw
 	];
 
 	# Bootloader
@@ -119,6 +119,8 @@
         linux-manual
         man-pages
         man-pages-posix
+        wineWowPackages.stable
+        wineWowPackages.waylandFull
 	];
 
     services.xserver = {

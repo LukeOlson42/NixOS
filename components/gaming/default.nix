@@ -6,6 +6,7 @@
         mangohud
         protonup
 
+        pipewire
         wireplumber
         vesktop
 

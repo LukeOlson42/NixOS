@@ -53,7 +53,7 @@ in
         package = pkgs.rofi-wayland;
     };
 
-    programs.wpaperd = {
+    services.wpaperd = {
         enable = true;
         settings = {
             default = {
@@ -150,7 +150,7 @@ in
     services.gammastep = {
         enable = true;
         dawnTime = "07:00";
-        duskTime = "17:00";
+        duskTime = "19:00";
         temperature = {
             day = 5700;
             night = 3000;
