@@ -27,7 +27,7 @@ in
 		];
     };
 
-    services.mako = {
+    services.mako.settings = {
         enable = true;
         font = "JetBrains Mono NerdFont 8";
         defaultTimeout = 10000;
@@ -223,13 +223,13 @@ in
                 ", mouse:275, resizewindow"
             ];
 
-            binde = [
-                ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
-                ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
-                ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-                ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
-                ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
-            ];
+            # binde = [
+            #     ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
+            #     ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
+            #     ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+            #     ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
+            #     ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
+            # ];
 
             misc = {
                 disable_hyprland_logo = true;
@@ -259,8 +259,14 @@ in
                 "maxsize 1 1, class:^(xwaylandvideobridge)$"
                 "noblur, class:^(xwaylandvideobridge)$"
                 "nofocus, class:^(xwaylandvideobridge)$"
+
+                # for popped out videos, always on top
                 "float, title:^(Picture-in-Picture)$"
                 "pin, title:^(Picture-in-Picture)$"
+
+                # For steam popups, always float
+                # TODO: float message windows
+                "float, class:steam, title:^Friends List$"
             ];
 
             decoration = {

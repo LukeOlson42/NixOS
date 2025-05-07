@@ -75,9 +75,6 @@ in
         enable = true;
         profile = "${username}";
         config = {
-            background = {
-                color = colorscheme.simple_green.primary.background;
-            };
             border = {
                 color = colorscheme.simple_green.normal.green;
                 width = "2px";

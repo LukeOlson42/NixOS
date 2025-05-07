@@ -189,6 +189,7 @@
 	environment = {
         variables = {
             EDITOR = "nvim";
+            BROWSER = "firefox";
             VISUAL = "nvim";
             TERM = "alacritty";
             SHELL = "zsh";
