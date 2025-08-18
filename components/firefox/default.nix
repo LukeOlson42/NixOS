@@ -12,6 +12,7 @@ in
         profiles."${username}" = {
             search = {
                 force = true;
+                default = "DuckDuckGo";
                 engines = {
                     "Nix Packages" = {
                         urls = [

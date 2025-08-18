@@ -91,7 +91,7 @@
         users.lukeolson = {
             isNormalUser = true;
             description = "Luke Olson";
-            extraGroups = [ "networkmanager" "wheel" "docker" ];
+            extraGroups = [ "networkmanager" "wheel" "docker" "openrazer" ];
             packages = with pkgs; [
                 qalculate-qt
             ];
@@ -121,6 +121,11 @@
         man-pages-posix
         wineWowPackages.stable
         wineWowPackages.waylandFull
+
+        # maybe pull into component
+        openrazer-daemon
+        polychromatic
+        streamdeck-ui
 	];
 
     services.xserver = {
@@ -163,6 +168,8 @@
         enable = true;
         powerOnBoot = true;
     };
+
+    hardware.openrazer.enable = true;
 
     services.blueman = {
         enable = true;

@@ -27,6 +27,13 @@ in
 		];
     };
 
+    xdg = {
+        mime.enable = true;
+        mimeApps.defaultApplications = {
+            "text/html" = "firefox.desktop";
+        };
+    };
+
     services.mako.settings = {
         enable = true;
         font = "JetBrains Mono NerdFont 8";
@@ -149,8 +156,10 @@ in
 
     services.gammastep = {
         enable = true;
-        dawnTime = "07:00";
-        duskTime = "19:00";
+        # dawnTime = "07:00";
+        # duskTime = "19:00";
+        latitude = "42.9704";
+        longitude = "-85.6722";
         temperature = {
             day = 5700;
             night = 3000;
