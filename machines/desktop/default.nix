@@ -9,8 +9,6 @@
         # Include the results of the hardware scan.
 		./desktop-hardware.nix
 
-        inputs.sddm-sugar-candy-nix.nixosModules.default
-
         ../../components/gaming
         ../../components/minecraft
         ../../components/docker
@@ -116,7 +114,7 @@
 
 	# Split in multiple files, for different package lists
 	environment.systemPackages = with pkgs; [
-        linux-manual
+        # linux-manual
         man-pages
         man-pages-posix
         wineWowPackages.stable
@@ -126,27 +124,26 @@
         openrazer-daemon
         polychromatic
         streamdeck-ui
+
+        greetd
+
+        remmina
+
+        xdg-utils
 	];
 
     services.xserver = {
         enable = true;
         videoDrivers = [ "amdgpu" ];
     };
-    services.displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-        autoNumlock = true;
 
-        sugarCandyNix = {
-            enable = true;
-            settings = {
-                Background   = lib.cleanSource ../../wallpapers/halfdome.jpg;
-                ScreenWidth  = 1920;
-                ScreenHeight = 1080;
-                FormPosition = "left";
-                HaveFormBackground = true;
-                PartialBlur = true;
-            };
+    services.displayManager = {
+        ly.enable = true;
+
+        sddm = {
+            enable = false;
+            wayland.enable = true;
+            autoNumlock = true;
         };
     };
 

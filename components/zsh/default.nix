@@ -20,7 +20,7 @@ in
             mkos = "sudo nixos-rebuild switch --flake ${hmDir}/NixOS/#main-desktop --show-trace --impure";
 		};
 
-        dotDir = ".config/zsh";
+        dotDir = "${config.home.homeDirectory}/.config/zsh";
 
 		history = {
 			size = 1000;

@@ -4,7 +4,7 @@ let
 in
 {
     imports = [
-        inputs.textfox.homeManagerModules.default
+
     ];
 
     programs.firefox = {
@@ -69,26 +69,6 @@ in
                     };
                 };
             };
-        };
-    };
-
-    textfox = {
-        enable = true;
-        profile = "${username}";
-        config = {
-            border = {
-                color = colorscheme.simple_green.normal.green;
-                width = "2px";
-                radius = "2px";
-            };
-            font = {
-                size = "12px";
-            };
-            tabs.vertical = {
-                margin = "0.8rem";
-            };
-            displayNavButtons = true;
-            displayTitles = false;
         };
     };
 }

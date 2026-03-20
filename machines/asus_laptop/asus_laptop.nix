@@ -87,18 +87,6 @@
         enable = true;
         wayland.enable = true;
         autoNumlock = true;
-
-        sugarCandyNix = {
-            enable = true;
-            settings = {
-                Background   = lib.cleanSource ../../wallpapers/halfdome.jpg;
-                ScreenWidth  = 1920;
-                ScreenHeight = 1080;
-                FormPosition = "left";
-                HaveFormBackground = true;
-                PartialBlur = true;
-            };
-        };
     };
 
     programs.hyprland.enable = true;

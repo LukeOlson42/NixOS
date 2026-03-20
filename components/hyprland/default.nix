@@ -20,7 +20,7 @@ in
     home = {
 		packages = with pkgs; [
             libnotify
-            rofi-wayland
+            rofi
             brightnessctl
             hyprshot
             pavucontrol
@@ -57,7 +57,6 @@ in
         terminal = "alacritty";
         font = "JetBrains Mono Nerd Font 12";
         theme = ./rofi/launcher.rasi;
-        package = pkgs.rofi-wayland;
     };
 
     services.wpaperd = {
@@ -170,11 +169,14 @@ in
     wayland.windowManager.hyprland = {
         enable = true;
 
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+
         settings = {
             # Hyprland Variables !!
-            "$mainMod" = "ALT";
+            "$mainMod" = "SUPER";
             "$winShift" = "SUPER_SHIFT";
-            "$mod" = "SUPER";
+            "$mod" = "ALT";
             "$terminal" = "alacritty";
             "$browser" = "firefox";
             "$editor" = "nvim";
@@ -243,6 +245,7 @@ in
             misc = {
                 disable_hyprland_logo = true;
                 animate_mouse_windowdragging = true;
+                initial_workspace_tracking = 2;
             };
 
             general = {
@@ -260,22 +263,22 @@ in
             };
 
             # Do we need this?
-            "windowrulev2" = [
-                "suppressevent maximize, class:.*"
-                "opacity 0.0 override, class:^(xwaylandvideobridge)$"
-                "noanim, class:^(xwaylandvideobridge)$"
-                "noinitialfocus, class:^(xwaylandvideobridge)$"
-                "maxsize 1 1, class:^(xwaylandvideobridge)$"
-                "noblur, class:^(xwaylandvideobridge)$"
-                "nofocus, class:^(xwaylandvideobridge)$"
+            "windowrule" = [
+                "suppress_event maximize, match:class .*"
+                "opacity 0.0 override, match:class ^(xwaylandvideobridge)$"
+                "no_anim on, match:class ^(xwaylandvideobridge)$"
+                "no_initial_focus on, match:class ^(xwaylandvideobridge)$"
+                "max_size 1 1, match:class ^(xwaylandvideobridge)$"
+                "no_blur on, match:class ^(xwaylandvideobridge)$"
+                "no_focus on, match:class ^(xwaylandvideobridge)$"
 
                 # for popped out videos, always on top
-                "float, title:^(Picture-in-Picture)$"
-                "pin, title:^(Picture-in-Picture)$"
+                "float on, match:title ^(Picture-in-Picture)$"
+                "pin on, match:title ^(Picture-in-Picture)$"
 
                 # For steam popups, always float
                 # TODO: float message windows
-                "float, class:steam, title:^Friends List$"
+                "float on, match:class steam, match:title ^Friends List$"
             ];
 
             decoration = {

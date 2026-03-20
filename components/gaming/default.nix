@@ -4,7 +4,7 @@
     environment.systemPackages = with pkgs; [
         # For Steam
         mangohud
-        protonup
+        protonup-ng
 
         pipewire
         wireplumber
