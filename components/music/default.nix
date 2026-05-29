@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 {
     environment.systemPackages = with pkgs; [
-        ardour
+        ardour_8
+        guitarix-vst
         audacity
+        dexed
     ];
 }

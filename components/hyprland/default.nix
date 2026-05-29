@@ -171,6 +171,7 @@ in
 
         package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
         portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        configType = "hyprlang";
 
         settings = {
             # Hyprland Variables !!
@@ -193,7 +194,6 @@ in
                 "$mainMod, Q, killactive"
 
                 "$mainMod, A, togglefloating"
-                "$mainMod, S, togglesplit"
                 "$mainMod, T, togglegroup"
                 "$mainMod, B, fullscreen, 0"
 
@@ -297,7 +297,7 @@ in
             };
 
             dwindle = {
-                pseudotile = true;
+                # pseudotile = true;
                 preserve_split = true;
             };
 
@@ -309,7 +309,7 @@ in
             ];
 
             # This may have to change between machines, later problem
-            monitor = "eDP-1, 1920x1080@60, 0x0, 1, bitdepth, 10";
+            monitor = "eDP-1, 2560x1440@200, 0x0, 1, bitdepth, 10";
         };
     };
     

@@ -10,7 +10,7 @@
 			eza
 			# TLDR
 			tealdeer
-			neofetch
+			fastfetch
             xclip
 
             # GCC, just in case ;)
@@ -29,8 +29,13 @@
 
     programs.git = {
         enable = true;
-        userEmail = "olsonluke42@gmail.com";
-        userName = "Luke Olson";
+        settings = {
+            user = {
+                email = "olsonluke42@gmail.com";
+                name = "Luke Olson";
+            };
+        };
+        signing.format = null;
     };
 
     programs.ssh = {

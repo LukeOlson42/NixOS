@@ -1,4 +1,4 @@
-{ pkgs, inputs, username, ... }:
+{ pkgs, config, inputs, username, ... }:
 let
     colorscheme = import ../colors.nix;
 in
@@ -9,10 +9,11 @@ in
 
     programs.firefox = {
         enable = true;
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
         profiles."${username}" = {
             search = {
                 force = true;
-                default = "DuckDuckGo";
+                default = "ddg";
                 engines = {
                     "Nix Packages" = {
                         urls = [

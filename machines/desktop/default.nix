@@ -13,7 +13,7 @@
         ../../components/minecraft
         ../../components/docker
         ../../components/nemo
-        ../../components/daw
+        ../../components/music
 	];
 
 	# Bootloader
@@ -44,8 +44,11 @@
     };
 
 	# Enable networking
-    networking.hostName = "nixos-desktop"; # Define your hostname.
-	networking.networkmanager.enable = true;
+    networking = {
+        hostName = "nixos-desktop"; # Define your hostname.
+        networkmanager.enable = true;
+        nameservers = ["1.1.1.1"];
+    };
 
 	# Set your time zone.
 	time.timeZone = "America/New_York";
@@ -117,18 +120,16 @@
         # linux-manual
         man-pages
         man-pages-posix
-        wineWowPackages.stable
-        wineWowPackages.waylandFull
+        wineWow64Packages.stable
+        wineWow64Packages.waylandFull
 
         # maybe pull into component
-        openrazer-daemon
-        polychromatic
+        # openrazer-daemon
+        # polychromatic
         streamdeck-ui
 
         greetd
-
         remmina
-
         xdg-utils
 	];
 
@@ -153,10 +154,15 @@
             xdgOpenUsePortal = true;
             config = {
                 common.default = ["gtk"];
-                hyprland.default = ["gtk" "hyprland"];
+                hyprland = {
+                    default = ["gtk" "hyprland"];
+                    "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+                    "org.freedesktop.impl.portal.OpenURI" = [ "gtk" ];
+                };
             };
             extraPortals = [
                 pkgs.xdg-desktop-portal-gtk
+                pkgs.xdg-desktop-portal
             ];
         };
     };
@@ -166,7 +172,7 @@
         powerOnBoot = true;
     };
 
-    hardware.openrazer.enable = true;
+    hardware.openrazer.enable = false;
 
     services.blueman = {
         enable = true;
