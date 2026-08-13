@@ -5,7 +5,7 @@
         inherit username;
         homeDirectory = "/home/${username}";
         # Don't change, check release notes if need to
-        stateVersion = "24.11"; # Please read the comment before changing.
+        stateVersion = "26.11"; # Please read the comment before changing.
     };
 
     nixpkgs.config.allowUnfree = true;

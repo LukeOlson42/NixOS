@@ -1,10 +1,16 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 let
     mkSwitchWkspCmds =
         builtins.concatLists (builtins.genList (i:
         let ws = i + 1; in
             [
-                "$mainMod, code:1${toString i}, workspace, ${toString ws}"
+                # "$mainMod, code:1${toString i}, workspace, ${toString ws}"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "\"{mainMod} + ${toString i}\"")
+                        (lib.generators.mkLuaInline "hl.dsp.focus(${toString ws})")
+                    ];
+                }
             ]
         ) 9);
 
@@ -12,7 +18,13 @@ let
         builtins.concatLists (builtins.genList (i:
         let ws = i + 1; in
             [
-                "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+                # "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "\"{mainMod} SHIFT + ${toString i}\"")
+                        (lib.generators.mkLuaInline "hl.dsp.window.move(${toString ws})")
+                    ];
+                }
             ]
         ) 9);
 in
@@ -168,71 +180,179 @@ in
 
     wayland.windowManager.hyprland = {
         enable = true;
-
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        systemd.enable = false;
+        # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        package = null;
+        portalPackage = null;
         configType = "hyprlang";
 
         settings = {
-            # Hyprland Variables !!
-            "$mainMod" = "SUPER";
-            "$winShift" = "SUPER_SHIFT";
-            "$mod" = "ALT";
-            "$terminal" = "alacritty";
-            "$browser" = "firefox";
-            "$editor" = "nvim";
-            "$fileManager" = "nemo";
-            "$menu" = "rofi -show drun";
-            "$ssLocation" = "~/screenshots/";
+            mainMod = {
+                _var = "SUPER";
+            };
+
+            winShift = {
+                _var = "SUPER_SHIFT";
+            };
+
+            mod = {
+                _var = "ALT";
+            };
+
+            terminal = {
+                _var = "alacritty";
+            };
+
+            browser = {
+                _var = "firefox";
+            };
+
+            editor = {
+                _var = "nvim";
+            };
+
+            fileManager = {
+                _var = "nemo";
+            };
+
+            menu = {
+                _var = "rofi -show drun";
+            };
+
+            ssLocation = {
+                _var = "~/screenshots/";
+            };
 
             # Keybinds !!
             bind = [
                 # General Keybinds
-                "$mainMod, Return, exec, [float] $terminal"
-                "$mainMod, M, exit"
-                "$mainMod, SPACE, exec, $menu"
-                "$mainMod, Q, killactive"
+                # "$mainMod, Return, exec, [float] $terminal"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + Return\"")
+                        (lib.generators.mkLuaInline "hl.dsp.exec_cmd(terminal)")
+                        (lib.generators.mkLuaInline "hl.dsp.window.float({ action = toggle })")
+                    ];
+                }
+                # "$mainMod, M, exit"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + M\"")
+                        "exit"
+                    ];
+                }
+                # "$mainMod, SPACE, exec, $menu"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + SPACE\"")
+                        (lib.generators.mkLuaInline "hl.dsp.exec_cmd(menu)")
+                    ];
+                }
+                # "$mainMod, Q, killactive"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + Q\"")
+                        (lib.generators.mkLuaInline "hl.dsp.window_close()")
+                    ];
+                }
 
-                "$mainMod, A, togglefloating"
-                "$mainMod, T, togglegroup"
-                "$mainMod, B, fullscreen, 0"
-
-                "$winShift, S, exec, hyprshot -o $ssLocation -m region"
-                "$mainMod, L, exec, hyprlock"
-                "$mainMod, C, exec, [float] qalculate-qt"
-                "$mainMod, O, exec, [float] nemo"
+                # "$mainMod, A, togglefloating"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + A\"")
+                        (lib.generators.mkLuaInline "hl.dsp.window.float({ action = toggle })")
+                    ];
+                }
+                # "$mainMod, B, fullscreen, 0"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + A\"")
+                        (lib.generators.mkLuaInline "hl.dsp.window.fullscreen({
+                            mode = \"maximized\",
+                            action = \"toggle\",
+                            window = 0,
+                        })")
+                    ];
+                }
+                # "$winShift, S, exec, hyprshot -o $ssLocation -m region"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "winShift .. \" + S\"")
+                        (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"hyprshot -o \" .. ssLocation .. \" -m region\")")
+                    ];
+                }
+                # "$mainMod, L, exec, hyprlock"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + L\"")
+                        (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"hyprlock\")")
+                    ];
+                }
+                # "$mainMod, C, exec, [float] qalculate-qt"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + C\"")
+                        (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"qalculate-qt\")")
+                        (lib.generators.mkLuaInline "hl.dsp.window.float({ action = toggle })")
+                    ];
+                }
+                # "$mainMod, O, exec, [float] nemo"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + O\"")
+                        (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"nemo\")")
+                        (lib.generators.mkLuaInline "hl.dsp.window.float({ action = toggle })")
+                    ];
+                }
 
                 # Movement Keybinds
-                "$mainMod, mouse_down, workspace, e+1"
-                "$mainMod, mouse_up, workspace, e-1"
+                # "$mainMod, h, movefocus, l"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + h\"")
+                        (lib.generators.mkLuaInline "hl.dsp.focus(\"l\")")
+                    ];
+                }
+                # "$mainMod, j, movefocus, d"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + j\"")
+                        (lib.generators.mkLuaInline "hl.dsp.focus(\"d\")")
+                    ];
+                }
+                # "$mainMod, k, movefocus, u"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + k\"")
+                        (lib.generators.mkLuaInline "hl.dsp.focus(\"u\")")
+                    ];
+                }
+                # "$mainMod, l, movefocus, r"
+                {
+                    _args = [
+                        (lib.generators.mkLuaInline "mainMod .. \" + l\"")
+                        (lib.generators.mkLuaInline "hl.dsp.focus(\"r\")")
+                    ];
+                }
 
-                "$mainMod, h, movefocus, l"
-                "$mainMod, j, movefocus, d"
-                "$mainMod, k, movefocus, u"
-                "$mainMod, l, movefocus, r"
-
-                "$mainMod SHIFT, h, movewindow, l"
-                "$mainMod SHIFT, j, movewindow, d"
-                "$mainMod SHIFT, k, movewindow, u"
-                "$mainMod SHIFT, l, movewindow, r"
-
-                "$mainMod SUPER, h, resizeactive, -20 0"
-                "$mainMod SUPER, j, resizeactive, 0 20"
-                "$mainMod SUPER, k, resizeactive, 0 -20"
-                "$mainMod SUPER, l, resizeactive, 20 0"
+                # "$mainMod SHIFT, h, movewindow, l"
+                # "$mainMod SHIFT, j, movewindow, d"
+                # "$mainMod SHIFT, k, movewindow, u"
+                # "$mainMod SHIFT, l, movewindow, r"
 
                 # tab cycling
-                "$mainMod, Tab, cyclenext"
-                "$mainMod, Tab, bringactivetotop"
+                # "$mainMod, Tab, cyclenext"
+                # "$mainMod, Tab, bringactivetotop"
             ] ++ mkMvWindowCmds ++ mkSwitchWkspCmds;
 
-            bindm = [
-                # Move and Resize Windows
-                "$mainMod, mouse:272, movewindow"
-                "$mainMod, mouse:273, resizewindow"
-                ", mouse:276, movewindow"
-                ", mouse:275, resizewindow"
-            ];
+            # bindm = [
+            #     # Move and Resize Windows
+            #     "$mainMod, mouse:272, movewindow"
+            #     "$mainMod, mouse:273, resizewindow"
+            #     ", mouse:276, movewindow"
+            #     ", mouse:275, resizewindow"
+            # ];
 
             # binde = [
             #     ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
@@ -249,36 +369,46 @@ in
             };
 
             general = {
-                allow_tearing = false;
-                layout = "dwindle";
                 gaps_in = 2;
                 gaps_out = 10;
                 border_size = 2;
 
-                "col.active_border" = "rgba(8ec07cff) rgba(689d6aff) 60deg";
+                col.active_border = "rgba(8ec07cff) rgba(689d6aff) 60deg";
                 # not gruvbox gray, but pretty nice 
-                "col.inactive_border" = "rgba(595959aa)";
+                col.inactive_border = "0x595959aa";
 
                 resize_on_border = false;
             };
 
-            # Do we need this?
-            "windowrule" = [
-                "suppress_event maximize, match:class .*"
-                "opacity 0.0 override, match:class ^(xwaylandvideobridge)$"
-                "no_anim on, match:class ^(xwaylandvideobridge)$"
-                "no_initial_focus on, match:class ^(xwaylandvideobridge)$"
-                "max_size 1 1, match:class ^(xwaylandvideobridge)$"
-                "no_blur on, match:class ^(xwaylandvideobridge)$"
-                "no_focus on, match:class ^(xwaylandvideobridge)$"
-
-                # for popped out videos, always on top
-                "float on, match:title ^(Picture-in-Picture)$"
-                "pin on, match:title ^(Picture-in-Picture)$"
-
-                # For steam popups, always float
-                # TODO: float message windows
-                "float on, match:class steam, match:title ^Friends List$"
+            window_rule = [
+                {
+                    name = "Steam Friends Float";
+                    match.class = "Steam";
+                    match.title = "^(Friends List)$";
+                    float = true;
+                }
+                {
+                    name = "Player on Top";
+                    match.title = "^(Picture-in-Picture)$";
+                    float = true;
+                    pin = true;
+                }
+                {
+                    name = "wayland video bridge?";
+                    match.class = "^(xwaylandvideobridge)$";
+                    suppress_event = "maximize";
+                    opacity = "0.0 override";
+                    no_anim = true;
+                    no_initial_focus = true;
+                    no_blur = true;
+                    no_focus = true;
+                    max_size = "{ 1, 1 }";
+                }
+                {
+                    name = "stop maximize?";
+                    match.class = ".*";
+                    suppress_event = "maximize";
+                }
             ];
 
             decoration = {
@@ -302,11 +432,16 @@ in
             };
 
             # Startup Programs !!
-            exec-once = [
-                "wpaperd"
-                "waybar"
-                "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-            ];
+            on = {
+                _args = [
+                    "hyprland.start"
+                    "function()
+                        hl.exec_cmd(\"wpaperd\")
+                        hl.exec_cmd(\"waybar\")
+                        hl.exec_cmd(\"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP\")
+                     end"
+                ];
+            };
 
             # This may have to change between machines, later problem
             monitor = "eDP-1, 2560x1440@200, 0x0, 1, bitdepth, 10";
