@@ -7,8 +7,8 @@ let
                 # "$mainMod, code:1${toString i}, workspace, ${toString ws}"
                 {
                     _args = [
-                        (lib.generators.mkLuaInline "\"{mainMod} + ${toString i}\"")
-                        (lib.generators.mkLuaInline "hl.dsp.focus(${toString ws})")
+                        (lib.generators.mkLuaInline "mainMod .. \" + ${toString i}\"")
+                        (lib.generators.mkLuaInline "hl.dsp.focus({workspace = ${toString ws}})")
                     ];
                 }
             ]
@@ -21,8 +21,8 @@ let
                 # "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
                 {
                     _args = [
-                        (lib.generators.mkLuaInline "\"{mainMod} SHIFT + ${toString i}\"")
-                        (lib.generators.mkLuaInline "hl.dsp.window.move(${toString ws})")
+                        (lib.generators.mkLuaInline "mainMod .. \" + SHIFT + ${toString i}\"")
+                        (lib.generators.mkLuaInline "hl.dsp.window.move({workspace = ${toString ws}})")
                     ];
                 }
             ]
@@ -185,7 +185,6 @@ in
         # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         package = null;
         portalPackage = null;
-        configType = "hyprlang";
 
         settings = {
             mainMod = {
@@ -193,7 +192,7 @@ in
             };
 
             winShift = {
-                _var = "SUPER_SHIFT";
+                _var = "SUPER + SHIFT";
             };
 
             mod = {
@@ -239,7 +238,7 @@ in
                 {
                     _args = [
                         (lib.generators.mkLuaInline "mainMod .. \" + M\"")
-                        "exit"
+                        (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"hyprshutdown\")")
                     ];
                 }
                 # "$mainMod, SPACE, exec, $menu"
@@ -253,7 +252,7 @@ in
                 {
                     _args = [
                         (lib.generators.mkLuaInline "mainMod .. \" + Q\"")
-                        (lib.generators.mkLuaInline "hl.dsp.window_close()")
+                        (lib.generators.mkLuaInline "hl.dsp.window.close()")
                     ];
                 }
 
@@ -311,28 +310,28 @@ in
                 {
                     _args = [
                         (lib.generators.mkLuaInline "mainMod .. \" + h\"")
-                        (lib.generators.mkLuaInline "hl.dsp.focus(\"l\")")
+                        (lib.generators.mkLuaInline "hl.dsp.focus({ direction = \"left\" })")
                     ];
                 }
                 # "$mainMod, j, movefocus, d"
                 {
                     _args = [
                         (lib.generators.mkLuaInline "mainMod .. \" + j\"")
-                        (lib.generators.mkLuaInline "hl.dsp.focus(\"d\")")
+                        (lib.generators.mkLuaInline "hl.dsp.focus({ direction = \"down\" })")
                     ];
                 }
                 # "$mainMod, k, movefocus, u"
                 {
                     _args = [
                         (lib.generators.mkLuaInline "mainMod .. \" + k\"")
-                        (lib.generators.mkLuaInline "hl.dsp.focus(\"u\")")
+                        (lib.generators.mkLuaInline "hl.dsp.focus({ direction = \"up\" })")
                     ];
                 }
                 # "$mainMod, l, movefocus, r"
                 {
                     _args = [
                         (lib.generators.mkLuaInline "mainMod .. \" + l\"")
-                        (lib.generators.mkLuaInline "hl.dsp.focus(\"r\")")
+                        (lib.generators.mkLuaInline "hl.dsp.focus({ direction = \"right\" })")
                     ];
                 }
 
@@ -361,24 +360,6 @@ in
             #     ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
             #     ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
             # ];
-
-            misc = {
-                disable_hyprland_logo = true;
-                animate_mouse_windowdragging = true;
-                initial_workspace_tracking = 2;
-            };
-
-            general = {
-                gaps_in = 2;
-                gaps_out = 10;
-                border_size = 2;
-
-                col.active_border = "rgba(8ec07cff) rgba(689d6aff) 60deg";
-                # not gruvbox gray, but pretty nice 
-                col.inactive_border = "0x595959aa";
-
-                resize_on_border = false;
-            };
 
             window_rule = [
                 {
@@ -411,40 +392,67 @@ in
                 }
             ];
 
-            decoration = {
-                rounding = 5;
-                active_opacity = 1.0;
-                inactive_opacity = 0.9;
-            };
+            config = {
+                decoration = {
+                    rounding = 5;
+                    active_opacity = 1.0;
+                    inactive_opacity = 0.9;
+                };
 
-            input = {
-                kb_layout = "us";
-                accel_profile = "flat";
-                sensitivity = 0.0;
-                follow_mouse = 1;
-                kb_options = "ctrl:nocaps";
-                repeat_delay = 250;
-            };
+                input = {
+                    kb_layout = "us";
+                    accel_profile = "flat";
+                    sensitivity = 0.0;
+                    follow_mouse = 1;
+                    kb_options = "ctrl:nocaps";
+                    repeat_delay = 250;
+                };
 
-            dwindle = {
-                # pseudotile = true;
-                preserve_split = true;
+                dwindle = {
+                    # pseudotile = true;
+                    preserve_split = true;
+                };
+
+                misc = {
+                    disable_hyprland_logo = true;
+                    animate_mouse_windowdragging = true;
+                    initial_workspace_tracking = 2;
+                };
+
+                general = {
+                    gaps_in = 2;
+                    gaps_out = 10;
+                    border_size = 2;
+
+                    col.active_border = (lib.generators.mkLuaInline "{ colors = { \"rgba(8ec07cff)\", \"rgba(689d6aff)\" }, angle = 60 }");
+
+                    # not gruvbox gray, but pretty nice 
+                    col.inactive_border = "0x595959aa";
+
+                    resize_on_border = false;
+                };
             };
 
             # Startup Programs !!
             on = {
                 _args = [
                     "hyprland.start"
-                    "function()
+                    (lib.generators.mkLuaInline "function()
                         hl.exec_cmd(\"wpaperd\")
                         hl.exec_cmd(\"waybar\")
                         hl.exec_cmd(\"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP\")
-                     end"
+                     end")
                 ];
             };
 
             # This may have to change between machines, later problem
-            monitor = "eDP-1, 2560x1440@200, 0x0, 1, bitdepth, 10";
+            monitor = {
+               output = "eDP-1";
+               mode = "2560x1440@200";
+               position = "0x0";
+               scale = 1;
+               bitdepth = 10;
+            };
         };
     };
     
