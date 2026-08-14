@@ -130,7 +130,7 @@
         streamdeck-ui
 
         greetd
-        remmina
+        # remmina
         xdg-utils
 	];
 
@@ -176,7 +176,7 @@
     hardware.openrazer.enable = false;
 
     services.blueman = {
-        enable = true;
+        enable = false;
     };
 
     hardware.graphics = {

@@ -188,15 +188,11 @@ in
 
         settings = {
             mainMod = {
-                _var = "SUPER";
+                _var = "ALT";
             };
 
             winShift = {
                 _var = "SUPER + SHIFT";
-            };
-
-            mod = {
-                _var = "ALT";
             };
 
             terminal = {
